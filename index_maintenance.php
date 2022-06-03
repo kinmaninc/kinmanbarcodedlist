@@ -608,11 +608,12 @@ $('#search_barcode').keyup(bindDelay(function (e) {
 
 }, 700));
 
-function showSnackbar(mode, color){
+function showSnackbar(mode, bgcolor, txtcolor = 'white'){
 	var x = document.getElementById("snackbar");
 	if(mode!=""){
       $('#snackbar').html(mode);
-      x.style.backgroundColor = color;
+      x.style.backgroundColor = bgcolor;
+      x.style.color = txtcolor;
       x.className = "show";
       setTimeout(function(){
        x.className = x.className.replace("show", "");
