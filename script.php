@@ -7,7 +7,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <!-- DataTables -->
-<script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+<!-- <script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/dataTables.colReorder.min.js"></script>
 <script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/dataTables.responsive.min.js"></script>
 <script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/dataTables.buttons.min.js"></script>
@@ -18,7 +18,7 @@
 <script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/buttons.print.min.js"></script>
 <script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/jquery.dataTables.yadcf.js"></script>
-<script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/dataTables.fixedColumns.min.js"></script>
+<script type="text/javascript" src="dist/DataTables/DataTables-1.10.18/js/dataTables.fixedColumns.min.js"></script> -->
 
 <!-- JsBarcode https://lindell.me/JsBarcode/ -->
 <script src="dist/JsBarcode/JsBarcode.all.min.js"></script>
