@@ -891,15 +891,16 @@ function print_order(){
 						</tr>
 					</thead>`;
 	text += `<tbody>`;
+	var number_ctr = 1;
 	for (var i=0; i<items.length; i++) {
 	    if(items[i].value != 0){
-
+			
 		  	var price = items[i]['dataset']['price'];
 		  	if(price == "" || typeof(price) == 'undefined' || price == null){
 		  		price = 0;
 		  	}
 				text += `<tr>`;
-		  	text += `<td>`+parseFloat(i+1)+`</td>`;
+		  	text += `<td>`+parseFloat(number_ctr)+`</td>`;
 		  	text += `<td>`+items[i]['dataset']['upc']+`</td>`;
 		  	text += `<td>`+items[i]['dataset']['category']+` - `+items[i]['dataset']['item_name']+`</td>`;
 		  	text += `<td>`+items[i]['dataset']['cover']+`</td>`;
@@ -910,6 +911,8 @@ function print_order(){
 		  	text += `</tr>`;
 
 		  	text += `<tr style="display: none;"><td colspan="7">
+			  				<input type="text" name="pid[`+i+`][]" value="`+items[i]['dataset']['pid']+`">
+
 		  					<input type="text" name="product[`+i+`][]" value="`+items[i]['dataset']['category']+`">
 
 		  					<input type="text" name="model[`+i+`][]" value="`+items[i]['dataset']['item_name']+`">
@@ -932,6 +935,8 @@ function print_order(){
 
 		  	total_qty = total_qty + parseFloat(items[i].value);
 		  	total_amount = total_amount + parseFloat(price)*parseFloat(items[i].value);
+
+			number_ctr++;
 	    }
 	}
 	text += "</tbody></table>";

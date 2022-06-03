@@ -1,6 +1,6 @@
 <?php
 require '../configuration.php';
-// echo json_encode($_POST[""]); 
+// echo json_encode($_POST[" "]); 
 // echo json_encode($_POST['cover']); 
 $dealer_id = mysqli_real_escape_string($connection, $_POST['user_id']);
 $without_discount_price =  floatval($_POST['orig_total_amount']);
@@ -92,28 +92,21 @@ $grand_total = 0;
 foreach($_POST['quantity'] as $key => $value){
 
 	$quantity = $value;
-	if(count($_POST['product'][$key])>1){
 
-		$model_name = mysqli_real_escape_string($connection, $_POST['model'][$key][0]);
 		$upc = mysqli_real_escape_string($connection, $_POST['upc'][$key][0]);
-		$product    = mysqli_real_escape_string($connection, $_POST['model'][$key][1]);
 		$qty    = mysqli_real_escape_string($connection, $_POST['quantity'][$key]);
-		$cover = mysqli_real_escape_string($connection, $_POST['cover'][$key][0]);
-		$description = mysqli_real_escape_string($connection, $_POST['description'][$key][0]);
 		$price = mysqli_real_escape_string($connection, $_POST['price'][$key][0]);
 		$addnotes = mysqli_real_escape_string($connection, $_POST['addnotes'][$key][0]);
+		
+		//new script for special strings/symbols we can input to the order
+		$pid =  $_POST['pid'][$key][0];
+		$search_pickups = mysqli_query($connection, "SELECT * FROM inv_pickups WHERE id = '$pid'");
+		$search_pickup = mysqli_fetch_assoc($search_pickups);
 
-	}else{
-		$model_name = mysqli_real_escape_string($connection, $_POST['model'][$key][0]);
-		$upc    = mysqli_real_escape_string($connection, $_POST['upc'][$key][0]);          
-		$product    = mysqli_real_escape_string($connection, $_POST['product'][$key][0]);          
-		$qty    = mysqli_real_escape_string($connection, $_POST['quantity'][$key]);
-		$cover = mysqli_real_escape_string($connection, $_POST['cover'][$key][0]);
-		$description = mysqli_real_escape_string($connection, $_POST['description'][$key][0]);
-		$price = mysqli_real_escape_string($connection, $_POST['price'][$key][0]);
-		$addnotes = mysqli_real_escape_string($connection, $_POST['addnotes'][$key][0]);
-
-	}
+		$product = mysqli_real_escape_string($connection, $search_pickup["category"]);
+		$model_name = mysqli_real_escape_string($connection, $search_pickup["item_name"]);
+		$description = mysqli_real_escape_string($connection, $search_pickup["description"]);
+		$cover = mysqli_real_escape_string($connection, $search_pickup["cover"]);
 
 	$grand_subtotal =0;
 	$sum = 0;
