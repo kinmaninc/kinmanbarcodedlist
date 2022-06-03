@@ -31,54 +31,53 @@ if($_SESSION['superuser']=='admin'){
         <span><?php echo $dealer["dealer_name"]; ?></span>
     </div>
     
-    
-    <div class="card sticky-top searchDiv float-left" id="searchDiv">
-    	<div class="row">
-    		<div class="col-lg-6 col-xs-12">
-		    	<div class="form-group">
-		    		 <span class="float-left" title="Hide search box" onclick="toggle_hide_search(0);" id="hide_search_btn"><i class="fa fa-angle-double-right sDiv_hide" aria-hidden="true"> </i></span> &nbsp;
-		    		 <label id="search_label"><strong>Search barcode here</strong></label>
-		    		<input type="text" id="search_barcode" class="form-control">
-		    		<div align="right" id="search_toggles">
-							<div class="form-check form-check-inline">
-							  <input class="form-check-input" type="radio" name="opt_search" id="opt_search1" value="ean">
-							  <label class="form-check-label" for="opt_search1">EAN</label>
+
+		<div class="card sticky-top searchDiv float-left sticky-top" id="searchDiv">
+			<div class="row">
+				<div class="col-lg-6 col-xs-12">
+					<div class="form-group">
+						<span class="float-left" title="Hide search box" onclick="toggle_hide_search(0);" id="hide_search_btn"><i class="fa fa-angle-double-right sDiv_hide" aria-hidden="true"> </i></span> &nbsp;
+						<label id="search_label"><strong>Search barcode here</strong></label>
+						<input type="text" id="search_barcode" class="form-control">
+						<div align="right" id="search_toggles">
+								<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="opt_search" id="opt_search1" value="ean">
+								<label class="form-check-label" for="opt_search1">EAN</label>
+								</div>
+								<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="opt_search" id="opt_search2" value="upc" checked>
+								<label class="form-check-label" for="opt_search2">UPC</label>
+								</div>
+								
 							</div>
-							<div class="form-check form-check-inline">
-							  <input class="form-check-input" type="radio" name="opt_search" id="opt_search2" value="upc" checked>
-							  <label class="form-check-label" for="opt_search2">UPC</label>
-							</div>
+						</div>
+				</div>
+				<div class="col-lg-6 col-xs-12" id="search_item_group">
+					<div class="form-group" id="moreoptions_div" style="background-color:#282828; padding-right: 10px; padding-left: 10px; height: auto; display: block;">
+						&nbsp;
+						<label id="search_label"><strong>Search by keywords</strong></label>
+						
+
+						<div class="input-group">
 							
+							<input type="text" id="search_item" class="form-control" placeholder="Item Name">
+							<div class="input-group-prepend">
+							<button type="button" class="btn btn-primary" id="littlesearchbtn" onclick="search_method2('single');"><i class="fa fa-search"></i></button>
+							</div>
 						</div>
-					</div>
-	    	</div>
-	    	<div class="col-lg-6 col-xs-12" id="search_item_group">
-		    	<div class="form-group" id="moreoptions_div" style="background-color:#282828; padding-right: 10px; padding-left: 10px; padding-bottom: 10px; height: 90px;">
-		    		  &nbsp;
-		    		 <label id="search_label"><strong>Search by keywords</strong></label>
-		    		
-
-		    		<div class="input-group">
-					    
-					    <input type="text" id="search_item" class="form-control" placeholder="Item Name">
-					    <div class="input-group-prepend">
-					      <button type="button" class="btn btn-primary" id="littlesearchbtn" onclick="search_method2('single');"><i class="fa fa-search"></i></button>
-					    </div>
-					  </div>
-					  <div align="right"><span class="fakehref" id="showmoreoptlink" onclick="showmoreopt(0);"> +More options</span></div>
-					  <div id="search_more_options" style="display: none;">
-						  <input type="text" placeholder="UPC" id="search_upc" class="form-control">
-						  <input type="text" placeholder="Category" id="search_category" class="form-control">
-						  <input type="text" placeholder="Description" id="search_description" class="form-control">
-						  <input type="text" placeholder="Cover" id="search_cover" class="form-control">
-						  <input type="text" placeholder="Notes" id="search_notes" class="form-control">
-						  <button type="button" class="btn btn-primary btn-block btn-sm" onclick="search_method2('more');"><i class="fa fa-search"></i> Search</button>
+						<div align="right"><span class="fakehref" id="showmoreoptlink" onclick="showmoreopt(0);"> +More options</span></div>
+						<div id="search_more_options" style="display: none;">
+							<input type="text" placeholder="UPC" id="search_upc" class="form-control">
+							<input type="text" placeholder="Category" id="search_category" class="form-control">
+							<input type="text" placeholder="Description" id="search_description" class="form-control">
+							<input type="text" placeholder="Cover" id="search_cover" class="form-control">
+							<input type="text" placeholder="Notes" id="search_notes" class="form-control">
+							<button type="button" class="btn btn-primary btn-block btn-sm" onclick="search_method2('more');"><i class="fa fa-search"></i> Search</button>
+							</div>
 						</div>
-					</div>
-	    	</div>
-	    </div>
-    </div>
-
+				</div>
+			</div>
+		</div>
 
     
 
@@ -118,14 +117,16 @@ if($_SESSION['superuser']=='admin'){
 
 						<br>
 						<div class="row">
-							<div class="col-lg-12 col-xs-12">
-								<button class="btn btn-outline-light btn-sm btn-block lightbutton" onclick="showSnackbar(`Pending work...`,`black`);show_settings(0);">Add Bulk items (Import)</button>
-
+							<div class="col-lg-12 col-xs-12 btn-white">
+								<button class="btn btn-outline-light btn-sm btn-block lightbutton" onclick="search_method2('duplicates');">Check for duplicate</button>
 							</div>
-							<div class="col-lg-12 col-xs-12">
+							<div class="col-lg-12 col-xs-12 btn-white">
+								<button class="btn btn-outline-light btn-sm btn-block lightbutton" onclick="showSnackbar(`Pending work...`,`black`);show_settings(0);">Add Bulk items (Import)</button>
+							</div>
+							<div class="col-lg-12 col-xs-12 btn-white">
 								<button class="btn btn-outline-light btn-sm btn-block lightbutton" data-toggle="modal" data-target="#update_import_modal" onclick="show_settings(0)">Update Bulk items (Import)</button>
 							</div>
-							<div class="col-lg-12 col-xs-12">
+							<div class="col-lg-12 col-xs-12 btn-white">
 								<form method="get" action="dist/phpspreadsheet/export_database.php">
                   <button type="submit" class="btn btn-outline-light btn-sm btn-block lightbutton">Export database (Export)</button>
                 </form>
@@ -1072,6 +1073,33 @@ function search_method2(mode) {
 			$('#search_Modal').modal("show");
 		}
 	}
+
+	if(mode == 'duplicates'){
+	
+			alert('work in progress');
+			// if(!isEmpty(search_val)){
+			// 	search_history_single = search_val;
+			// 	$('#search_Modal').modal("show");
+				
+			// 	$.ajax({
+			// 		url: "controller/action.php",
+			// 		type: "POST",
+			// 		data: {action: "search_item_single", search: search_val},
+			// 		beforeSend: function(){
+			// 			$('#search_results').html('Searching...');
+			// 		},
+			// 		success: function(data){
+			// 			$('#search_results').html(data);
+			// 		}
+			// 	});
+			// }else{
+			// 	search_history_single = "";
+			// 	$('#search_results').html("");
+			// 	removeHighlight();
+
+			// }
+
+	}
 }
 
 function scrollToRow(upc){
@@ -1089,13 +1117,16 @@ function showmoreopt(type){
 		$('#showmoreoptlink').attr("onclick", "showmoreopt(1);");
 		$('#showmoreoptlink').html('-Less options');
 		$('#littlesearchbtn').hide();
-		$('#moreoptions_div').css("height", "330px");
+		$("#moreoptions_div").css("padding-bottom", "10px");
+		
+		//$('#moreoptions_div').css("height", "330px");
 	}else{
 		$('#search_more_options').hide();
 		$('#showmoreoptlink').attr("onclick", "showmoreopt(0);");
 		$('#showmoreoptlink').html('+More options');
 		$('#littlesearchbtn').show();
-		$('#moreoptions_div').css("height", "90px");
+		$("#moreoptions_div").css("padding-bottom", "0px");
+		//$('#moreoptions_div').css("height", "90px");
 	}
 }
 

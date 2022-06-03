@@ -98,14 +98,29 @@ tr td{
 }
 
 #pagetitle {
-    padding: 15px;
-    float: left;
-    padding: 15px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background:rgb(99 43 35);
+    width: 100%;
 }
+#searchmaincontainer{
+    margin-top: 10px;
+    width: 100%;
+    display: inline-block;
+}
+
+
+#search_more_options > input {
+  /* margin-bottom: 5px; */
+}
+
 .searchDiv {
   z-index: 2;
-    float: left;
-    left: 20px;
+  float: left;
+  left: 20px;
   right: 20px; 
   width: 600px; 
   height: 108px; 
@@ -113,7 +128,10 @@ tr td{
   padding-bottom: 0px;
   background-color: #282828;
   color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
+
 .sDiv_hide{
   cursor: pointer;
   color: #FF9B00;
@@ -152,13 +170,15 @@ tr td{
   border-radius: 5px; /* Rounded borders */
   padding: 16px; /* Padding */
   position: fixed; /* Sit on top of the screen */
-  z-index: 1; /* Add a z-index if needed */
+  z-index: 5; /* Add a z-index if needed */
   right: 1%; /* Center the snackbar */
   top: 30px; /* 30px from the bottom */
   height: 50px;
   
 }
-
+.btn-white {
+  margin: 1px;
+}
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
 #snackbar.show {
@@ -265,6 +285,7 @@ input:checked + .slider:before {
 }
 
 .discounttooltipsy{
+  color: black;
   margin: 5px;
   z-index: 3;
   position: absolute;
