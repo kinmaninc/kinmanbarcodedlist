@@ -1,0 +1,16 @@
+[26-Apr-2022 00:19:37 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home4/soniminc/pi.kinman.com/configuration.php on line 7
+[26-Apr-2022 00:19:37 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home4/soniminc/pi.kinman.com/configuration.php on line 7
+[26-Apr-2022 00:20:43 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home4/soniminc/pi.kinman.com/configuration.php on line 7
+[26-Apr-2022 00:20:43 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home4/soniminc/pi.kinman.com/configuration.php on line 7
+[26-Apr-2022 00:20:53 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home4/soniminc/pi.kinman.com/configuration.php on line 7
+[26-Apr-2022 00:21:01 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home4/soniminc/pi.kinman.com/configuration.php on line 7
+[26-Apr-2022 00:21:01 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home4/soniminc/pi.kinman.com/configuration.php on line 7
+[26-Apr-2022 00:21:16 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home4/soniminc/pi.kinman.com/configuration.php on line 7
+[26-Apr-2022 00:21:17 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home4/soniminc/pi.kinman.com/configuration.php on line 7
+[26-Apr-2022 00:21:19 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home4/soniminc/pi.kinman.com/index.php on line 71
+[26-Apr-2022 00:21:24 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home4/soniminc/pi.kinman.com/index.php on line 71
+[26-Apr-2022 00:21:47 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home4/soniminc/pi.kinman.com/index.php on line 71
+[26-Apr-2022 00:21:57 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home4/soniminc/pi.kinman.com/index.php on line 71
+[26-Apr-2022 00:22:17 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home4/soniminc/pi.kinman.com/index.php on line 71
+[26-Apr-2022 00:22:27 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home4/soniminc/pi.kinman.com/index.php on line 71
+[26-Apr-2022 01:50:41 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home4/soniminc/pi.kinman.com/index.php on line 50
