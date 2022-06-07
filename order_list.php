@@ -19,7 +19,7 @@ if($_SESSION["superuser"]=="admin"){
 <div class="container">
 	<br>
 	<br>
-	<table class="table table-bordered table-hover">
+	<table class="table table-bordered table-hover" id="myOrderHistoryTable">
 		<thead>
 			<tr>
 				<th>Order ID</th>
@@ -44,7 +44,7 @@ if($_SESSION["superuser"]=="admin"){
 				$order_detail = mysqli_fetch_assoc($order_details);
 
 				echo '<tr>';
-				echo '<td><a href="order_view.php?oid='.$order["f_order_id"].'" target="_blank">'.$order["f_order_id"].'</span></td>';
+				echo '<td><a href="order_view.php?oid='.$order["f_order_id"].'" target="_blank" onclick="clickRow(event)">'.$order["f_order_id"].'</span></td>';
 				echo '<td>'.date("F d, Y h:i:s A", strtotime($order["f_order_date"])).'</td>';
 				echo '<td>'.$user["first_name"].' '.$user["last_name"].'</td>';
 				echo '<td>'.$order_detail["SUM(f_quantity)"].'</td>';
@@ -77,6 +77,27 @@ if($_SESSION["superuser"]=="admin"){
       </div>
    	</div>
   </div>
+
+<script type="text/javascript">
+	function clickRow(e){
+		e.preventDefault();
+    var table = document.getElementById("myOrderHistoryTable");
+    let indexAt = e.target.parentElement.parentElement.rowIndex;
+    let rowExists = $('#iframe'+indexAt);
+    if(rowExists.length == 0){
+    	var row = table.insertRow(parseFloat(indexAt+1));
+	    var cell1 = row.insertCell();
+	    cell1.innerHTML = `<iframe id="iframe`+indexAt+`" src="order_view.php?oid=`+e.target.innerText+`" style="width: 100%; height: 600px;"></iframe>`;
+	    cell1.colSpan = "6";
+    }else{
+    	table.deleteRow(indexAt+1);
+    }
+
+}
+
+</script>
+
+
 <?php 
 }else{
 	echo '<h1>Access denied.</h1>';

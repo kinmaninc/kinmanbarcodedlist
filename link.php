@@ -13,8 +13,12 @@
 <link rel="stylesheet" type="text/css" href="dist/DataTables/DataTables-1.10.18/css/fixedColumns.bootstrap.min.css">
 
 
-
 <style type="text/css">
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 .va_ta{
  vertical-align: middle;
  text-align: center;
@@ -75,23 +79,47 @@ tr td{
   border-radius: 0;
 }
 .modal-fullscreen-body{
-  overflow-y: auto;
+  //overflow-y: auto;
+}
+#search_Modal {
+  padding: 0;
+  height: 100%
 }
 
+#tablescroller {
+  width: 100%;
+  height: 50%;
+  border: 2px solid red;
+}
+
+#thead > tr > th {
+  position: sticky;
+  top: -0.9px;  /* 0px if you don't have a navbar, but something is required */
+  background: white;
+  border:2px solid white;
+}
+
+#tablescroller > table {
+  width: 100%;
+  height: 100%;
+}
+.modal-content , .modal-body, #search_results {
+  height: 100%;
+}
 .modal-bottom-dialog{
   width: 100%;
   max-width: none;
-  /*height: 60vh;*/
+  height: 40%;
   margin: 0;
+  //overflow-y: auto;
+ // overscroll-y: auto;
   top: 55vh;
 }
 .modal-bottom-content{
   border: 0;
   border-radius: 0;
 }
-.modal-bottom-body{
-  overflow-y: auto;
-}
+
 
 .arial-10pt{
   font-family: Arial, Helvetica, sans-serif; font-size: 13.3px;
@@ -114,7 +142,8 @@ tr td{
 
 
 #search_more_options > input {
-  /* margin-bottom: 5px; */
+  margin-bottom: 2px;
+
 }
 
 .searchDiv {
@@ -284,6 +313,8 @@ input:checked + .slider:before {
   width: 300px;
 }
 
+
+
 .discounttooltipsy{
   color: black;
   margin: 5px;
@@ -355,5 +386,46 @@ input:checked + .slider:before {
 
 }
 
+
+
+
+/* Product Main Table Styles */
+
+#maincontentcotainer {
+    padding-left: 10px; 
+    padding-right: 10px; 
+    height: 90%
+}
+ 
+
+#prodtablecontainer {
+    //border: 1px solid rgb(255 0 0);
+    display: block;
+    max-height: 80%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+/* ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+} */
 
 </style>

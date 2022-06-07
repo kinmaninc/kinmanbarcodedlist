@@ -64,8 +64,8 @@ $dealer = mysqli_fetch_assoc($dealers);
         </div>
     </div>
     
-    
-    <div class="card sticky-top searchDiv float-left" id="searchDiv">
+    <?php require 'search_panel.php'; ?>
+    <!-- <div class="card sticky-top searchDiv float-left" id="searchDiv">
     	<div class="row">
     		<div class="col-lg-6 col-xs-12">
 		    	<div class="form-group">
@@ -110,10 +110,10 @@ $dealer = mysqli_fetch_assoc($dealers);
 					</div>
 	    	</div>
 	    </div>
-    </div>
+    </div> -->
 
 
-	<div style="padding-left: 10px; padding-right: 10px;">
+	<div id = 'maincontentcotainer'>
 		<br>
 		<div style = 'display: none;' class="pull-left">
 		<h1>Pickups Inventory</h1>
@@ -130,7 +130,7 @@ $dealer = mysqli_fetch_assoc($dealers);
 	-->
 		<?php if($_SESSION['superuser']=='admin'){ ?>
 				<div class="float-right" id="super_editor" style="margin-bottom: 10px;">
-        	<button type="button" class="btn btn-warning btn-sm" onclick="location.href = 'order_list.php';"><i class="fa fa-list"></i> Order History</button>
+        	<a type="button" class="btn btn-warning btn-sm" href="order_list.php"><i class="fa fa-list"></i> Order History</a>
         	<button type="button" class="btn btn-info btn-sm" onclick="viewpage('guest')"><i class="fa fa-eye"></i> Normal mode</button>
         	<button type="button" class="btn btn-light btn-sm" onclick="viewpage('admin')"><i class="fa fa-cogs"></i> Edit mode</button>
         
@@ -160,9 +160,9 @@ $dealer = mysqli_fetch_assoc($dealers);
 	    <?php
 	     }
 	  } ?>
-        	
+        	<?php require 'product_table.php'; ?>
 
-			<table class="table table-bordered" id="myTable">
+			<!-- <table class="table table-bordered" id="myTable">
 				<thead class="thead-dark" style="position: sticky; top: 0; z-index: 1;">
 					<tr>
 
@@ -191,7 +191,7 @@ $dealer = mysqli_fetch_assoc($dealers);
 
 				</tbody>
 			</table>
-	</div>
+	</div> -->
 
 </body>
 </html>

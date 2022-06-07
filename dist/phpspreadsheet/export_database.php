@@ -86,6 +86,8 @@ $spreadsheet->getActiveSheet()->getStyle('A3:A'.$row)->getNumberFormat()->setFor
 $spreadsheet->getActiveSheet()->getStyle('C3:C'.$row)->getNumberFormat()->setFormatCode(PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
 $spreadsheet->getActiveSheet()->getStyle('H3:H'.$row)->getNumberFormat()->setFormatCode(PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
 
+$spreadsheet->getActiveSheet()->getComment('A2')->getText()->createTextRun('Do NOT delete column "ID"');
+
 //set the header first, so the result will be treated as an xlsx file.
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 

@@ -281,6 +281,7 @@ if(isset($_POST["action"])){
 		
 		if($row_results>0){
 			echo '<h5>Search Results:</h5>
+				<div style="overflow-y: scroll; max-height: 90%;">
 			         <table class="table table-bordered">
 			           <thead>
 			             <th>UPC</th>
@@ -309,7 +310,7 @@ if(isset($_POST["action"])){
 			}
 
 			echo '</tbody>
-			    </table> ';
+			    </table> </div> ';
 		}else{
 			echo '<h4 align="center">No results found.</h4>';
 		}
@@ -355,15 +356,18 @@ if(isset($_POST["action"])){
 		
 		if($row_results>0){
 			echo '<h5>Search Results:</h5>
+			<div style="overflow-y: scroll; max-height: 90%;">
 			         <table class="table table-bordered">
-			           <thead>
+			           <thead id = "thead">
 			             <th>UPC</th>
 			             <th>Category</th>
 			             <th>Item name</th>
 			             <th>Cover</th>
 			             <th>Price</th>
 			           </thead>
-			           <tbody>';
+			           <tbody>
+					   
+';
 			while($pickup = mysqli_fetch_assoc($pickups)){
 				$short_text_item_name = preg_replace( "/\n\s+/", "\n", trim(strip_tags(htmlspecialchars_decode($pickup["item_name"]))));
 				if(strlen($short_text_item_name) > 25){
@@ -383,7 +387,8 @@ if(isset($_POST["action"])){
 			}
 
 			echo '</tbody>
-			    </table> ';
+			    </table> 
+				</div>';
 		}else{
 			echo '<h4 align="center">No results found.</h4>';
 		}
@@ -657,6 +662,88 @@ if(isset($_POST["action"])){
 		$id = $_POST["id"];
 		$filename = mysqli_real_escape_string($connection, $_POST["filename"]);
 		mysqli_query($connection, "UPDATE inv_pickups SET img_path = '$filename' WHERE id = '$id'");
+	}
+
+	if($_POST["action"]=="backup_files"){
+	    $today = date("Y-m-d");
+	    $time = time();
+	    //!!!!!!!!---------------------------------\                        
+	    //!!!!!!!!----------------------------------\              BBBBBB     BB    BB    BB   BBBBB
+	    //!!!!!!!!-----------------------------------\             BB   BB   BBBB   BBB   BB  BB   BB
+	    //!!!!!!!!------------------------------------\            BB   BB  BB  BB  BBBB  BB  BB
+	    //!!!!!!!!-------------------------------------\           BBBBBB   BBBBBB  BB BB BB  BB  BBB
+	    //change path if this is not running on localhost          BB   BB  BB  BB  BB  BBBB  BB   BB
+	    //!!!!!!!!--------------------------------------/          BB   BB  BB  BB  BB    BB  BB   BB
+	    //!!!!!!!!-------------------------------------/           BBBBBB   BB  BB  BB    BB   BBBBB
+	    //!!!!!!!!------------------------------------/
+	    //!!!!!!!!-----------------------------------/
+	    //!!!!!!!!----------------------------------/
+	    new GoodZipArchive('../../barcodedlist', '../Back-up/System files/Barcoded list System Back-up ['.$today.'] - '.$time.'.zip');
+	    $backupzip = 'Barcoded list System Back-up ['.$today.'] - '.$time.'.zip';
+	    echo $backupzip;
+	}
+
+
+	if($_POST["action"]=="backup_db"){
+	    $connection->set_charset("utf8");
+
+	    // Get All Table Names From the Database
+	    $tables = array();
+	    $sql = "SHOW TABLES WHERE Tables_in_".$database." IN ('inv_pickups', 'inv_login_logs', 'inv_pickups_settings')";
+	    $result = mysqli_query($connection, $sql);
+
+	    while ($row = mysqli_fetch_row($result)) {
+	        $tables[] = $row[0];
+	    }
+
+	    $sqlScript = "";
+	    foreach ($tables as $table) {
+	        
+	        // Prepare SQLscript for creating table structure
+	        $query = "SHOW CREATE TABLE $table";
+	        $result = mysqli_query($connection, $query);
+	        $row = mysqli_fetch_row($result);
+	        
+	        $sqlScript .= "\n\n" . $row[1] . ";\n\n";
+	        
+	        
+	        $query = "SELECT * FROM $table";
+	        $result = mysqli_query($connection, $query);
+	        
+	        $columnCount = mysqli_num_fields($result);
+	        
+	        // Prepare SQLscript for dumping data for each table
+	        for ($i = 0; $i < $columnCount; $i ++) {
+	            while ($row = mysqli_fetch_row($result)) {
+	                $sqlScript .= "INSERT INTO $table VALUES(";
+	                for ($j = 0; $j < $columnCount; $j ++) {
+	                    $row[$j] = $row[$j];
+	                    
+	                    if (isset($row[$j])) {
+	                        $sqlScript .= '"' . $row[$j] . '"';
+	                    } else {
+	                        $sqlScript .= '""';
+	                    }
+	                    if ($j < ($columnCount - 1)) {
+	                        $sqlScript .= ',';
+	                    }
+	                }
+	                $sqlScript .= ");\n";
+	            }
+	        }
+	        
+	        $sqlScript .= "\n"; 
+	    }
+
+	    if(!empty($sqlScript)){
+	        // Save the SQL script to a backup file
+	        $backup_file_name = '../Back-up/Database/'.$database.'_backup_'.strtoupper(date("FdY")).'_'.time().'.sql';
+	        $fileHandler = fopen($backup_file_name, 'w+');
+	        $number_of_lines = fwrite($fileHandler, $sqlScript);
+	        fclose($fileHandler); 
+
+	    }
+	    echo basename($backup_file_name);
 	}
 
 }

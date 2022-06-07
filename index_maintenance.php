@@ -31,58 +31,11 @@ if($_SESSION['superuser']=='admin'){
         <span><?php echo $dealer["dealer_name"]; ?></span>
     </div>
     
-
-		<div class="card sticky-top searchDiv float-left sticky-top" id="searchDiv">
-			<div class="row">
-				<div class="col-lg-6 col-xs-12">
-					<div class="form-group">
-						<span class="float-left" title="Hide search box" onclick="toggle_hide_search(0);" id="hide_search_btn"><i class="fa fa-angle-double-right sDiv_hide" aria-hidden="true"> </i></span> &nbsp;
-						<label id="search_label"><strong>Search barcode here</strong></label>
-						<input type="text" id="search_barcode" class="form-control">
-						<div align="right" id="search_toggles">
-								<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="opt_search" id="opt_search1" value="ean">
-								<label class="form-check-label" for="opt_search1">EAN</label>
-								</div>
-								<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="opt_search" id="opt_search2" value="upc" checked>
-								<label class="form-check-label" for="opt_search2">UPC</label>
-								</div>
-								
-							</div>
-						</div>
-				</div>
-				<div class="col-lg-6 col-xs-12" id="search_item_group">
-					<div class="form-group" id="moreoptions_div" style="background-color:#282828; padding-right: 10px; padding-left: 10px; height: auto; display: block;">
-						&nbsp;
-						<label id="search_label"><strong>Search by keywords</strong></label>
-						
-
-						<div class="input-group">
-							
-							<input type="text" id="search_item" class="form-control" placeholder="Item Name">
-							<div class="input-group-prepend">
-							<button type="button" class="btn btn-primary" id="littlesearchbtn" onclick="search_method2('single');"><i class="fa fa-search"></i></button>
-							</div>
-						</div>
-						<div align="right"><span class="fakehref" id="showmoreoptlink" onclick="showmoreopt(0);"> +More options</span></div>
-						<div id="search_more_options" style="display: none;">
-							<input type="text" placeholder="UPC" id="search_upc" class="form-control">
-							<input type="text" placeholder="Category" id="search_category" class="form-control">
-							<input type="text" placeholder="Description" id="search_description" class="form-control">
-							<input type="text" placeholder="Cover" id="search_cover" class="form-control">
-							<input type="text" placeholder="Notes" id="search_notes" class="form-control">
-							<button type="button" class="btn btn-primary btn-block btn-sm" onclick="search_method2('more');"><i class="fa fa-search"></i> Search</button>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-
-    
+	<?php require 'search_panel.php'; ?>
 
 
-	<div style="padding-left: 10px; padding-right: 10px;">
+
+	<div id = 'maincontentcotainer' style="">
 		<br>
 		<div style = 'display: none;' class="pull-left">
 		<h1>Pickups Inventory</h1>
@@ -100,9 +53,9 @@ if($_SESSION['superuser']=='admin'){
 				<div class="float-right">
         	<button type="button" class="btn btn-light btn-sm" onclick="viewpage('guest')"><i class="fa fa-eye"></i> Normal mode</button>
         	<button type="button" class="btn btn-info btn-sm" onclick="viewpage('admin')"><i class="fa fa-cogs"></i> Edit mode</button>
-        	<button class="btn btn-outline-light btn-sm lightbutton" id="settings_btn" onclick="show_settings(1);"><i class="fa fa-cog"></i></button>
-        	<div class="tooltipsy">
-        		<span class="float-right cursor" onclick="show_settings(0)">&times;</span>
+        	<button class="btn btn-outline-light btn-sm lightbutton" id="settings_btn" ><i class="fa fa-cog"></i></button>
+        	<div class="tooltipsy" style = 'display: none;'>
+        		<span class="float-right cursor" onclick="show_settings(1)">&times;</span>
 	        	<p class="stronggg">Settings</p>
 	        	<label class="switch">
 						  <input type="checkbox" name="allowcustomerstoorder" <?php if($site_setting["allow_customers_to_order"]=="yes"){ echo 'checked'; } ?>>
@@ -116,20 +69,28 @@ if($_SESSION['superuser']=='admin'){
 
 
 						<br>
+						<p class="stronggg" style="margin-bottom: 0px;">Back-up <i class="fa fa-folder-open fakehref"></i></p>
+						<div class="row">
+							<div class="col-lg-12 btn-white">
+								<button class="btn btn-outline-light btn-sm btn-block lightbutton" id="backup_file_btn" onclick="backup('files');">System Files</button>
+							</div>
+							<div class="col-lg-12 btn-white">
+								<button class="btn btn-outline-light btn-sm btn-block lightbutton" id="backup_db_btn" onclick="backup('db');">Database</button>
+							</div>
+						</div>
+						<br>
+						<p class="stronggg" style="margin-bottom: 0px;">Import/Export</p>
 						<div class="row">
 							<div class="col-lg-12 col-xs-12 btn-white">
-								<button class="btn btn-outline-light btn-sm btn-block lightbutton" onclick="search_method2('duplicates');">Check for duplicate</button>
-							</div>
-							<div class="col-lg-12 col-xs-12 btn-white">
-								<button class="btn btn-outline-light btn-sm btn-block lightbutton" onclick="showSnackbar(`Pending work...`,`black`);show_settings(0);">Add Bulk items (Import)</button>
+								<button class="btn btn-outline-light btn-sm btn-block lightbutton" data-toggle="modal" data-target="#add_import_modal" onclick="show_settings(0);">Add Bulk items (Import)</button>
 							</div>
 							<div class="col-lg-12 col-xs-12 btn-white">
 								<button class="btn btn-outline-light btn-sm btn-block lightbutton" data-toggle="modal" data-target="#update_import_modal" onclick="show_settings(0)">Update Bulk items (Import)</button>
 							</div>
 							<div class="col-lg-12 col-xs-12 btn-white">
 								<form method="get" action="dist/phpspreadsheet/export_database.php">
-                  <button type="submit" class="btn btn-outline-light btn-sm btn-block lightbutton">Export database (Export)</button>
-                </form>
+								<button type="submit" class="btn btn-outline-light btn-sm btn-block lightbutton">Export table (Export)</button>
+								</form>
 							</div>
 						</div>
 	        </div>
@@ -146,7 +107,8 @@ if($_SESSION['superuser']=='admin'){
         	<br>
         	<br>
         	<br>
-			<table class="table table-bordered">
+			<?php require 'product_table.php'; ?>
+			<!-- <table class="table table-bordered">
 				<thead class="thead-dark" style="position: sticky; top: 0;">
 					<tr>
 						<th style="width: 20px;"><input type="checkbox" id="selectall_chb" onchange="selectallcheckbox();"></th>
@@ -163,7 +125,7 @@ if($_SESSION['superuser']=='admin'){
 				</thead>
 				<tbody id="pickups_table_body" class="arial-10pt">
 				</tbody>
-			</table>
+			</table> -->
 	</div>
 
 </body>
@@ -319,6 +281,7 @@ if($_SESSION['superuser']=='admin'){
 <?php require 'search_modal.php'; ?>
 
 <?php require 'update_bulk_items_modal_and_script.php'; ?>
+<?php require 'add_bulk_items_modal_and_script.php'; ?>
 
 <script type="text/javascript">
 show_table_pickups();
@@ -624,15 +587,7 @@ function showSnackbar(mode, bgcolor, txtcolor = 'white'){
   }
 }
 
-function show_settings(val){
-	if(val==1){
-		$('.tooltipsy').show();
-		$('#settings_btn').attr("onclick", "show_settings(0)");
-	}else{
-		$('.tooltipsy').hide();
-		$('#settings_btn').attr("onclick", "show_settings(1)");
-	}
-}
+
 
 function removeHighlight() {
 	let h = document.querySelectorAll('tr.highlighted');
@@ -694,7 +649,7 @@ function viewpage(type){
 
 
 
-// start of Maintenance script 
+// start of Maintenance script
 
 // Add function
 
@@ -1112,24 +1067,26 @@ function scrollToRow(upc){
 	});
 }
 
-function showmoreopt(type){
-	if(type==0){
-		$('#search_more_options').show();
-		$('#showmoreoptlink').attr("onclick", "showmoreopt(1);");
-		$('#showmoreoptlink').html('-Less options');
-		$('#littlesearchbtn').hide();
-		$("#moreoptions_div").css("padding-bottom", "10px");
+// function showmoreopt(type){
+// 	if(type==0){
+// 		//document.querySelector('#moreoptionschk').checked = true;
+// 		$('#search_more_options').show();
+// 		$('#showmoreoptlink').attr("onclick", "showmoreopt(1);");
+// 		$('#showmoreoptlink').html('-Less options');
+// 		$('#littlesearchbtn').hide();
+// 		$("#moreoptions_div").css("padding-bottom", "10px");
 		
-		//$('#moreoptions_div').css("height", "330px");
-	}else{
-		$('#search_more_options').hide();
-		$('#showmoreoptlink').attr("onclick", "showmoreopt(0);");
-		$('#showmoreoptlink').html('+More options');
-		$('#littlesearchbtn').show();
-		$("#moreoptions_div").css("padding-bottom", "0px");
-		//$('#moreoptions_div').css("height", "90px");
-	}
-}
+// 		//$('#moreoptions_div').css("height", "330px");
+// 	}else{
+// 		//document.querySelector('#moreoptionschk').checked = false;
+// 		$('#search_more_options').hide();
+// 		$('#showmoreoptlink').attr("onclick", "showmoreopt(0);");
+// 		$('#showmoreoptlink').html('+More options');
+// 		$('#littlesearchbtn').show();
+// 		$("#moreoptions_div").css("padding-bottom", "0px");
+// 		//$('#moreoptions_div').css("height", "90px");
+// 	}
+// }
 
 
 // end of Maintenance script
@@ -1178,6 +1135,28 @@ allowcustomerstoorder.addEventListener('change', function() {
 //   }
 // });
 
+function backup(type){
+		$.ajax({
+        url: "controller/action.php",
+        type: "POST",
+        data: {action: "backup_"+type},
+        beforeSend: function(){
+        	$('#backup_'+type+'_btn').attr("disabled", true);
+        },
+        success: function(data){
+        	$('#backup_'+type+'_btn').attr("disabled", false);
+        	var msg = "";
+        	if(type=="files"){
+        		msg = "System files backed up successfully.";
+        	}
+        	if(type=="db"){
+        		msg = "Database backed up successfully.";
+        	}
+        	showSnackbar(msg, "#4DD53D", "white");
+
+        }
+    })
+}
 
 
 
