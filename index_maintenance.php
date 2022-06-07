@@ -66,7 +66,11 @@ if($_SESSION['superuser']=='admin'){
 						  <input type="checkbox" name="maintenancemode" disabled <?php if($site_setting["maintenance_mode"]=="yes"){ echo 'checked'; } ?>>
 						  <span class="slider"></span>
 						</label> <span title="Toggling this will temporarily disable customers to see all the data in this ordering page.">Maintenance mode</span> -->
-
+						<div class="row">
+							<div class="col-lg-12 col-xs-12 btn-white">
+								<button class="btn btn-outline-light btn-sm btn-block lightbutton"  onclick="showSnackbar(`Pending work`,`black`)">Check for duplicates</button>
+							</div>
+						</div>
 
 						<br>
 						<p class="stronggg" style="margin-bottom: 0px;">Back-up <i class="fa fa-folder-open fakehref"></i></p>
