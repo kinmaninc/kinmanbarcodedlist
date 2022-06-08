@@ -76,7 +76,7 @@ if($_SESSION['superuser']=='admin'){
 						<p class="stronggg" style="margin-bottom: 0px;">Back-up <i class="fa fa-folder-open fakehref"></i></p>
 						<div class="row">
 							<div class="col-lg-12 btn-white">
-								<button class="btn btn-outline-light btn-sm btn-block lightbutton" id="backup_file_btn" onclick="backup('files');">System Files</button>
+								<button class="btn btn-outline-light btn-sm btn-block lightbutton" id="backup_file_btn" onclick="//backup('files');" disabled>System Files</button>
 							</div>
 							<div class="col-lg-12 btn-white">
 								<button class="btn btn-outline-light btn-sm btn-block lightbutton" id="backup_db_btn" onclick="backup('db');">Database</button>
