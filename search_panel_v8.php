@@ -56,8 +56,6 @@ window.onload = (() => {
 	var searchmorediv = document.querySelector("#moreoptions_div");
 	var searchmoreinputs = document.querySelector("#search_more_options");
 
-	// var settingsbtn = document.querySelector("#settings_btn");
-	// var tooltipsydiv = document.querySelector(".tooltipsy");
 	if(url.includes('index_maintenance')){
 		var settingsbtn = document.querySelector("#settings_btn");
 		var tooltipsydiv = document.querySelector(".tooltipsy");
@@ -79,14 +77,11 @@ window.onload = (() => {
 		if (!clickinopt && !clickindiv && !clickininputs) {
 			showmoreopt(1);
 		}
+
 		if(url.includes('index_maintenance')){
-			//settings tooltip window
-			var clicinsettingsbtn = settingsbtn.contains(event.target);
-			var clickinitooltipsy = tooltipsydiv.contains(event.target);
-		
-		// if (!clickinopt && !clickindiv && !clickininputs) {
-		// 	showmoreopt(1);
-		// }
+		//settings tooltip window
+		var clicinsettingsbtn = settingsbtn.contains(event.target);
+		var clickinitooltipsy = tooltipsydiv.contains(event.target);		
 			if ( !clickinitooltipsy && !clicinsettingsbtn) {
 				show_settings(1);
 			}
@@ -101,13 +96,7 @@ window.onload = (() => {
 		}
 	});
 
-	// settingsbtn.onclick = ((event) => {
-	// 	if(document.querySelector('.tooltipsy').style.display == 'none') {
-	// 		show_settings(0);
-	// 	}else {
-	// 		show_settings(1);
-	// 	}
-	// });
+
 });
 
 function showmoreopt(type){
