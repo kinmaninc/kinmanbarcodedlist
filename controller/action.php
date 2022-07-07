@@ -678,7 +678,7 @@ if(isset($_POST["action"])){
 	    //!!!!!!!!------------------------------------/
 	    //!!!!!!!!-----------------------------------/
 	    //!!!!!!!!----------------------------------/
-	    new GoodZipArchive('../../barcodedlist', '../Back-up/System files/Barcoded list System Back-up ['.$today.'] - '.$time.'.zip');
+	    new GoodZipArchive('../../pi.kinman.com', '../Back-up/System files/Barcoded list System Back-up ['.$today.'] - '.$time.'.zip');
 	    $backupzip = 'Barcoded list System Back-up ['.$today.'] - '.$time.'.zip';
 	    echo $backupzip;
 	}
