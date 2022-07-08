@@ -750,3 +750,25 @@ if(isset($_POST["action"])){
 
 
 ?>
+
+<?php  include_once('highlight_codes.php')  ?>
+<script> 
+var elements = []; 
+highlight.forEach((item) => {
+   // console.log("item :"+ item);
+	document.querySelectorAll('#pickups_table_body tr').forEach((tr) => {
+        var tr_id = tr.id.replace('upc_','');
+        elements.push(tr_id);
+    });
+	elements.forEach((element) => {
+			if(element == item) {
+				//console.log(element +"-"+ item);
+				document.querySelector('#upc_'+element).style.backgroundColor = 'yellow';
+			}else {
+				document.querySelector('#pickups_table_body tr').style.backgroundColor = 'none';
+			}
+	});
+});
+ 
+
+</script> 

@@ -12,7 +12,7 @@
             <div class = 'row' id = 'foldercontainer'>
                 <div class="col-lg-3">
                     <a href="#" onclick = "openDir('sys_files')">
-                        <img src="files/folder.png" alt="">
+                        <img src="site_images/folder.png" alt="">
                         <b>System Files</b>
                     </a>
                 </div>

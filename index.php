@@ -128,16 +128,22 @@ $dealer = mysqli_fetch_assoc($dealers);
 		</div> 
 		<br>
 	-->
-		<?php if($_SESSION['superuser']=='admin'){ ?>
-				<div class="float-right" id="super_editor" style="margin-bottom: 10px;">
-        	<a type="button" class="btn btn-warning btn-sm" href="order_list.php"><i class="fa fa-list"></i> Order History</a>
+
+
+			<div class="float-right" id="super_editor" style="margin-bottom: 10px;">
+
+		  <?php if($_SESSION['superuser']=='admin'){ ?>		
+		  	<form method="get" action="dist/phpspreadsheet/export_database.php" style = 'display: inline-block'>
+		    	<button type="submit" class="btn btn-light btn-sm" id = 'export2ndbtn' ><i class="fa fa-file-export"></i> Export on Excel Spreadsheet</button>
+        	</form>	
+			<a type="button" class="btn btn-warning btn-sm" href="order_list.php"><i class="fa fa-list"></i> Order History</a>
         	<button type="button" class="btn btn-info btn-sm" onclick="viewpage('guest')"><i class="fa fa-eye"></i> Normal mode</button>
         	<button type="button" class="btn btn-light btn-sm" onclick="viewpage('admin')"><i class="fa fa-cogs"></i> Edit mode</button>
         
         	<br>
         	<br>
         	<button type="button" id="show_order_btn" class="btn btn-danger btn-sm" onclick="print_order();" disabled><i class="fa fa-shopping-cart"></i> Show Order</button>
-        	<button type="button" class="btn btn-outline-primary btn-sm" onclick="show_table_pickups(null, 'default');"><i class="fa fa-retweet"></i> Refresh table</button>
+        	<button type="button" class="btn btn-outline-primary btn-sm" onclick="show_table_pickups(null, 'default');"><i class="fa fa-retweet"></i> Clear Selections</button>
         	
         	</div> 
 
@@ -150,10 +156,13 @@ $dealer = mysqli_fetch_assoc($dealers);
     			if($site_setting["allow_customers_to_order"]=="yes"){
     			?>
 
-    			<div class="float-right" id="super_editor" style="margin-bottom: 10px;">
+    			<div class="float-right" id="super_editor" style="margin-bottom: 10px;" >
     				<br>
         		<br>
-	    			<button type="button" id="show_order_btn" class="btn btn-danger btn-sm" onclick="print_order();" disabled><i class="fa fa-shopping-cart"></i> Show Order</button>
+				<form method="get" action="dist/phpspreadsheet/export_database.php" style = 'display: inline-block'>
+		    	  <button type="submit" class="btn btn-light btn-sm" id = 'export2ndbtn' ><i class="fa fa-file-export"></i> Export on Excel Spreadsheet</button>
+        	    </form>		
+	    		<button type="button" id="show_order_btn" class="btn btn-danger btn-sm" onclick="print_order();" disabled><i class="fa fa-shopping-cart"></i> Show Order</button>
 	        	<button type="button" class="btn btn-outline-primary btn-sm" onclick="show_table_pickups(null, 'default');"><i class="fa fa-retweet"></i> Refresh table</button>
 	        </div>
 

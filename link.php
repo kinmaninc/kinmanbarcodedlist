@@ -514,4 +514,12 @@ height: 100%;
     display: block;
     color: white;
 }
+
+
+.highlight-row {
+  background: yellow;
+}
+.no-highlgiht {
+  background: none;
+}
 </style>

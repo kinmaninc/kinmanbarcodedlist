@@ -51,7 +51,8 @@ if($_SESSION['superuser']=='admin'){
 		<br> 
 		-->
 				<div class="float-right">
-        	<button type="button" class="btn btn-light btn-sm" onclick="viewpage('guest')"><i class="fa fa-eye"></i> Normal mode</button>
+        	<button type="button" class="btn btn-light btn-sm" id = 'export2ndbtn' ><i class="fa fa-file-export"></i> Export on Excel Spreadsheet</button>
+			<button type="button" class="btn btn-light btn-sm" onclick="viewpage('guest')"><i class="fa fa-eye"></i> Normal mode</button>
         	<button type="button" class="btn btn-info btn-sm" onclick="viewpage('admin')"><i class="fa fa-cogs"></i> Edit mode</button>
         	<button class="btn btn-outline-light btn-sm lightbutton" id="settings_btn" ><i class="fa fa-cog"></i></button>
         	<div class="tooltipsy" style = 'display: none;'>
@@ -93,7 +94,7 @@ if($_SESSION['superuser']=='admin'){
 							</div>
 							<div class="col-lg-12 col-xs-12 btn-white">
 								<form method="get" action="dist/phpspreadsheet/export_database.php">
-								<button type="submit" class="btn btn-outline-light btn-sm btn-block lightbutton">Export table (Export)</button>
+								<button id = 'exportbtn' type="submit" class="btn btn-outline-light btn-sm btn-block lightbutton">Export table (Export)</button>
 								</form>
 							</div>
 						</div>
@@ -835,6 +836,11 @@ function save_data(type){
 
 		}
 }
+
+
+document.getElementById('export2ndbtn').onclick = (() => {
+	document.getElementById('exportbtn').click();
+});
 
 
 //edit script
