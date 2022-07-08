@@ -155,10 +155,6 @@ $dealer = mysqli_fetch_assoc($dealers);
     			
     			if($site_setting["allow_customers_to_order"]=="yes"){
     			?>
-
-    			<div class="float-right" id="super_editor" style="margin-bottom: 10px;" >
-    				<br>
-        		<br>
 				<form method="get" action="dist/phpspreadsheet/export_database.php" style = 'display: inline-block'>
 		    	  <button type="submit" class="btn btn-light btn-sm" id = 'export2ndbtn' ><i class="fa fa-file-export"></i> Export on Excel Spreadsheet</button>
         	    </form>		
@@ -171,36 +167,6 @@ $dealer = mysqli_fetch_assoc($dealers);
 	  } ?>
         	<?php require 'product_table.php'; ?>
 
-			<!-- <table class="table table-bordered" id="myTable">
-				<thead class="thead-dark" style="position: sticky; top: 0; z-index: 1;">
-					<tr>
-
-						<?php if($_SESSION['superuser']=='admin'){ ?>
-						<th style="width: 70px;" id="print_column">Qty</th>
-						<?php }else{ 
-
-							if($site_setting['allow_customers_to_order']=="yes"){
-						?>
-						<th style="width: 70px;" id="print_column">Qty</th>
-						<?php 
-							}
-						} ?>
-						<th>UPC</th>
-						<th>EAN</th>
-						<th>Category</th>
-						<th>Item Name</th>
-						<th>Description</th>
-						<th>Cover</th>
-						<th>Notes</th>
-						<th>Weight</th>
-						<th>Price</th>
-					</tr>
-				</thead>
-				<tbody id="pickups_table_body" class="arial-10pt">
-
-				</tbody>
-			</table>
-	</div> -->
 
 </body>
 </html>
