@@ -16,7 +16,7 @@ if($_SESSION["superuser"]=="admin"){
 <h1 align="center" class="title-separator">ORDER HISTORY PAGE <small>Orders from Bar Coded Products only</small></h1>
 <a href="index.php" class="float-left" style="padding-left:10px;"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Go back to ordering page</a>
 
-<div class="container">
+<div class="container"  style = 'overflow-y: auto; height: 100%;'>
 	<br>
 	<br>
 	<table class="table table-bordered table-hover" id="myOrderHistoryTable">

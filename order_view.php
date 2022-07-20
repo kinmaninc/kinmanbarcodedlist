@@ -23,7 +23,7 @@ $order_shipping = mysqli_fetch_assoc($order_shippings);
 
 <body>
 
-<div class="container">	
+<div class="container" style = 'overflow-y: auto; height: 100%;'>	
     <h4 align="center" class="title-separator">Shipping Summary</h4>
     <div class="row">
         	<div class="col-lg-3 col-xs-12">
