@@ -22,24 +22,25 @@ $order_shipping = mysqli_fetch_assoc($order_shippings);
 </head>
 
 <body>
-<div class="container">
-	<!-- <img src="dist/img/king-of-noiseless.jpg" class="img-fluid" alt="Responsive image"> -->
-	<br>
-	<a href="index.php" class="float-left"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Go back to ordering page</a>
-	<br>
-    <div align="center"><img src="dist/img/king-of-noiseless.jpg" style="width: 230px;"></div>
-    <hr>
-    <h3 align="center">Order Summary</h3>
-    <hr>
-    <p class="stronggg">PLEASE do NOT 'Contact Us' for updates as we can not advise until it's shipped.</p>
-    <p><strong>NOTE</strong>: Your order will only begin processing after payment is received so do not delay.</p>
-    <p>An Order Acknowledgement has been sent to your registered email address. If you do not receive the email check your registered email address and your Junk mail folder. This document can be viewed anytime in <br><a href="https://kinman.com/messages.php" target="_blank">Members Area > Message Bank</a></p>
-    <p>Thank you. <br>The Kinman ORDER PROCESSING Team</p>
-    <br>
-    <h4 align="center" class="title-separator">Shipping Summary</h4>
-    <div class="row">
-        	<div class="col-lg-3 col-xs-12">
-        	</div>
+<div class="container" style  = 'height: 100%;'>
+    <div style  = 'height: 100%; display: inline-block; overflow-y: auto;'>
+        <!-- <img src="dist/img/king-of-noiseless.jpg" class="img-fluid" alt="Responsive image"> -->
+        <br>
+        <a href="index.php" class="float-left"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Go back to ordering page</a>
+        <br>
+        <div align="center"><img src="dist/img/king-of-noiseless.jpg" style="width: 230px;"></div>
+        <hr>
+        <h3 align="center">Order Summary</h3>
+        <hr>
+        <p class="stronggg">PLEASE do NOT 'Contact Us' for updates as we can not advise until it's shipped.</p>
+        <p><strong>NOTE</strong>: Your order will only begin processing after payment is received so do not delay.</p>
+        <p>An Order Acknowledgement has been sent to your registered email address. If you do not receive the email check your registered email address and your Junk mail folder. This document can be viewed anytime in <br><a href="https://kinman.com/messages.php" target="_blank">Members Area > Message Bank</a></p>
+        <p>Thank you. <br>The Kinman ORDER PROCESSING Team</p>
+        <br>
+        <h4 align="center" class="title-separator">Shipping Summary</h4>
+
+        <div class="row">
+        	<div class="col-lg-3 col-xs-12"></div>
         	<div class="col-lg-6 col-xs-12" align="center">
         		<div style="padding: 20px; border-radius: 7px; border: 1px solid black;">
         			<p class="ptoleft">Name of Recipient: <span class="stronggg" id="box_nameofrecipient"><?php echo $order_shipping["shipto"] ?></span></p>
@@ -55,9 +56,9 @@ $order_shipping = mysqli_fetch_assoc($order_shippings);
         			<p class="ptoleft">Landline Telephone: <span class="stronggg" id="box_telno"><?php echo $order_shipping["delivery_tel"] ?></span></p>
         		</div>
         	</div>
-        	<div class="col-lg-3 col-xs-12">
-        	</div>
+        	<div class="col-lg-3 col-xs-12"></div>
         </div>
+
         	<br>
 
         	<table align="center" style="padding: 10px;">
@@ -82,10 +83,10 @@ $order_shipping = mysqli_fetch_assoc($order_shippings);
         $order_details = mysqli_query($connection, "SELECT * FROM t_order_details WHERE f_order_id='$orderid'");
         while($order_detail = mysqli_fetch_assoc($order_details)){
             echo '<table class="table" style="width:90%;" align="center">
-            <tr>
-                <th>Quantity: '.$order_detail["f_quantity"].'</th>
-                <th colspan="2" class="ptoright">Discount: '.$order_detail["f_discount"].'%</th>
-            </tr>';
+                    <tr>
+                        <th>Quantity: '.$order_detail["f_quantity"].'</th>
+                        <th colspan="2" class="ptoright">Discount: '.$order_detail["f_discount"].'%</th>
+                    </tr>';
             $order_detail_id = $order_detail["f_order_details_id"];
             $order_lists = mysqli_query($connection, "SELECT * FROM t_order_list WHERE f_order_details_id='$order_detail_id'");
             while($order_list = mysqli_fetch_assoc($order_lists)){
@@ -97,33 +98,35 @@ $order_shipping = mysqli_fetch_assoc($order_shippings);
                         }else{
                             echo '<td class="ptoright" style="width:20%;"></td>';
                         }
-                    echo '</tr>';
+                echo '</tr>';
             }
             
 
             if(!empty($order_detail["f_additional_note"])){
                 echo '<tr>
-                <td class="stronggg">Additional notes: </td>
-                    <td colspan="2" style="color:red;">'.$order_detail["f_additional_note"].'</td>
-                </tr>';
+                        <td class="stronggg">Additional notes: </td>
+                            <td colspan="2" style="color:red;">'.$order_detail["f_additional_note"].'</td>
+                        </tr>';
             }
 
-        echo '</table><div align="center"><div style="width:90%; background-color: #9C3737; height:3px;"></div></div>';
+            echo '</table><div align="center"><div style="width:90%; background-color: #9C3737; height:3px;"></div></div>';
         }
 
         ?>
         <br>
-        <table class="table" style="width:100%;">
-        <tr style="background: #292929; color: white;">
-            <td class="stronggg ptoleft">TOTAL:</td> 
-            <td class="ptoright">
-                <p style="margin-bottom: -10px;"><?php echo number_format($order["f_discount_price"], 2, ".", ","); ?> USD</p>
-                <p style="margin-bottom: -5px; color: #68DF63;"><?php echo '-'.number_format($order["f_discount_price"]-$order["f_total_amount"], 2, ".", ","); ?> USD </p>
-                <?php echo '<span class="stronggg" style="font-size: 20px;">'.$order["f_total_amount"].' USD</span>'; ?>
-            </td>
-        </tr>
-        </table>
-        </div>
+
+            <table class="table" style="width:100%;">
+                <tr style="background: #292929; color: white;">
+                    <td class="stronggg ptoleft">TOTAL:</td> 
+                    <td class="ptoright">
+                        <p style="margin-bottom: -10px;"><?php echo number_format($order["f_discount_price"], 2, ".", ","); ?> USD</p>
+                        <p style="margin-bottom: -5px; color: #68DF63;"><?php echo '-'.number_format($order["f_discount_price"]-$order["f_total_amount"], 2, ".", ","); ?> USD </p>
+                        <?php echo '<span class="stronggg" style="font-size: 20px;">'.$order["f_total_amount"].' USD</span>'; ?>
+                    </td>
+                </tr>
+            </table>
+
+     </div>
 </div>
 <br>
 <br>
