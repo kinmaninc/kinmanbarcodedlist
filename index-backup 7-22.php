@@ -83,9 +83,9 @@ $dealer = mysqli_fetch_assoc($dealers);
 	-->
 
 
-			<div class="float-right" id="super_editor" style="margin-bottom: 10px; position: relative;">
+			<div class="float-right" id="super_editor" style="margin-bottom: 10px;">
 
-	<?php if($_SESSION['superuser']=='admin'){ ?>		
+		  <?php if($_SESSION['superuser']=='admin'){ ?>		
 		  	<form method="get" action="dist/phpspreadsheet/export_database.php" style = 'display: inline-block'>
 		    	<button type="submit" class="btn btn-light btn-sm" id = 'export2ndbtn' ><i class="fa fa-file-export"></i> Export on Excel Spreadsheet</button>
         	</form>	
@@ -98,6 +98,12 @@ $dealer = mysqli_fetch_assoc($dealers);
         	<button type="button" id="show_order_btn" class="btn btn-danger btn-sm" onclick="print_order();" disabled><i class="fa fa-shopping-cart"></i> Show Order</button>
         	<button type="button" class="btn btn-outline-primary btn-sm" onclick="show_table_pickups(null, 'default');"><i class="fa fa-retweet"></i> Clear Selections</button>
         	
+        	</div> 
+
+        	<br>
+        	<br>
+        	<br>
+        	<br>
     <?php }else{ //if guest mode
     			
     			if($site_setting["allow_customers_to_order"]=="yes"){
@@ -107,13 +113,11 @@ $dealer = mysqli_fetch_assoc($dealers);
         	    </form>		
 	    		<button type="button" id="show_order_btn" class="btn btn-danger btn-sm" onclick="print_order();" disabled><i class="fa fa-shopping-cart"></i> Show Order</button>
 	        	<button type="button" class="btn btn-outline-primary btn-sm" onclick="show_table_pickups(null, 'default');"><i class="fa fa-retweet"></i> Refresh table</button>
-	        
-           
+	        </div>
+
 	    <?php
 	     }
 	  } ?>
-         <?php require 'floating_totalweight_and_displaybox.php'; ?>
-        </div>
         	<?php require 'product_table.php'; ?>
 
 
@@ -457,7 +461,7 @@ $("#search_barcode").keyup(function(event) {
     	if(sb.length == 13){
 	    	console.log("Searching code: "+sb);
 	    	$("#search_barcode").focus();
-	        $("#search_barcode").select();
+	      $("#search_barcode").select();
 	      
 				removeHighlight();
 				
@@ -765,7 +769,6 @@ function show_table_pickups(upc, loader){
 
 			
 			$("input[data-type='qty_selector']").bind('keyup mouseup', function (event) {
-                get_items(event.target.id);
 			    if(event.target.value != 0){
 			    	$('#'+event.target.id).css("border", "2px solid #FF7401");
 			    	

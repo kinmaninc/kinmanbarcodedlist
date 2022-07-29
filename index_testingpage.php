@@ -457,7 +457,7 @@ $("#search_barcode").keyup(function(event) {
     	if(sb.length == 13){
 	    	console.log("Searching code: "+sb);
 	    	$("#search_barcode").focus();
-	      $("#search_barcode").select();
+	        $("#search_barcode").select();
 	      
 				removeHighlight();
 				

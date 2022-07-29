@@ -1,12 +1,9 @@
 <?php
 require '../configuration.php';
-
-
  $highlight = array(
 "639114917715",
 "639114917777",
 "639114917838",
-"639114917890",
 "639114917951",
 "639114918019",
 "639114918071",
@@ -17,17 +14,26 @@ require '../configuration.php';
 "639114918293",
 "639114918323",
 "639114918354",
+"639114918385",
+"639114918415",
+"639114918446",
+"639114918477",
+"639114918507",
+"639114918538",
 "639114918569",
 "639114918583",
 "639114918606",
 "639114918620",
+"639114918644",
+"639114918668",
+"639114918682",
+"639114918705",
 "639114918729",
 "639114918781",
 "639114918842",
 "639114918903",
 "639114918965",
 "639114919085",
-"639114919207",
 "639114919313",
 "639114919375",
 "639114919399",
@@ -35,25 +41,23 @@ require '../configuration.php';
 "639114919474",
 "639114919498",
 "639114919641",
-"639114919672",
 "639114919535",
 "639114919566",
-"639114919573",
 "639114919603",
 "639114919702");
 
-
-
-
-
-
+ 
 if(isset($_POST["action"])){
-
 	$color = 'background: none';
 	$codes = mysqli_query($connection, "SELECT * FROM inv_pickups");
 		while($code = mysqli_fetch_assoc($codes)){
-			foreach($highlight as $item) {
-				if($item == $code["upc"]) {
+
+			foreach($highlight as $codes) {
+   			// echo '<pre>';
+			// var_dump($highlight);
+			// echo '</pre>';
+
+				if($codes == $pickup["upc"]) {
 					$color = 'background: yellow';
 				}else {
 					$color = 'background: none';
@@ -67,50 +71,42 @@ if(isset($_POST["action"])){
 		echo '~u make the flowers bloom';
 	}
 	if($_POST["action"]=="show_table_pickups"){
+		
 		$pickups = mysqli_query($connection, "SELECT * FROM inv_pickups");
 		while($pickup = mysqli_fetch_assoc($pickups)){
-
-			$short_text_description = preg_replace( "/\n\s+/", "\n", trim(strip_tags(htmlspecialchars_decode($pickup["description"]))));
-			if(strlen($short_text_description) > 50){
-					$short_text_description = substr($short_text_description, 0, 50)."...";
-			}
-
-			$short_text_notes = preg_replace( "/\n\s+/", "\n", trim(strip_tags(htmlspecialchars_decode($pickup["notes"]))));
-			if(strlen($short_text_notes) > 50){
-					$short_text_notes = substr($short_text_notes, 0, 50)."...";
-			}
- 
-			foreach($highlight as $item) {
-				if($item == $pickup["upc"]) {
-					$color = 'background: yellow';
-				    break;
-				}else {
-					$color = 'background: none';
-					 
-				}
+	 
 				
-			}
+				$short_text_description = preg_replace( "/\n\s+/", "\n", trim(strip_tags(htmlspecialchars_decode($pickup["description"]))));
+				if(strlen($short_text_description) > 50){
+						$short_text_description = substr($short_text_description, 0, 50)."...";
+				}
 
-			echo '<tr id="upc_'.$pickup["upc"].'" style="scroll-margin: 170px; '.$color.';">';
-			echo '<td class="va_ta"><input type="checkbox" class="chkbox" name="mycheckboxes" id="cbox_'.$pickup["id"].'" value="'.$pickup["id"].'"></td>';
-			echo '<td><a href="javascript:void(0)" onclick="view_item('.$pickup["upc"].', '.$pickup["id"].')" >'.$pickup["upc"].'</td>';
-			echo '<td id="ean_'.$pickup["ean"].'" style="scroll-margin: 170px;">'.$pickup["ean"].'</td>';
-			echo '<td>'.$pickup["category"].'</td>';
-			echo '<td>'.$pickup["item_name"].'</td>';
-			echo '<td>'.$short_text_description.'</td>';
-			echo '<td>'.$pickup["cover"].'</td>';
-			echo '<td>'.$short_text_notes.'</td>';
-			if(!empty($pickup["weight"])){
-				echo '<td>'.$pickup["weight"].' Kg</td>';
-			}else{
-			    echo '<td></td>';
-			}
-			if(!empty($pickup["price"])){
-				 echo '<td>$'.number_format($pickup["price"], 2, ".", "").'</td>';
-			}else{
-				echo '<td></td>';
-			}
-			echo '</tr>';
+				$short_text_notes = preg_replace( "/\n\s+/", "\n", trim(strip_tags(htmlspecialchars_decode($pickup["notes"]))));
+				if(strlen($short_text_notes) > 50){
+						$short_text_notes = substr($short_text_notes, 0, 50)."...";
+				}
+
+				echo '<tr id="upc_'.$pickup["upc"].'" style="scroll-margin: 170px; '.$color.'; ">';
+				echo '<td class="va_ta"><input type="checkbox" class="chkbox" name="mycheckboxes" id="cbox_'.$pickup["id"].'" value="'.$pickup["id"].'"></td>';
+				echo '<td><a href="javascript:void(0)" onclick="view_item('.$pickup["upc"].', '.$pickup["id"].')" >'.$pickup["upc"].'</td>';
+				echo '<td id="ean_'.$pickup["ean"].'" style="scroll-margin: 170px;">'.$pickup["ean"].'</td>';
+				echo '<td>'.$pickup["category"].'</td>';
+				echo '<td>'.$pickup["item_name"].'</td>';
+				echo '<td>'.$short_text_description.'</td>';
+				echo '<td>'.$pickup["cover"].'</td>';
+				echo '<td>'.$short_text_notes.'</td>';
+				if(!empty($pickup["weight"])){
+					echo '<td>'.$pickup["weight"].' Kg</td>';
+				}else{
+					echo '<td></td>';
+				}
+				if(!empty($pickup["price"])){
+					echo '<td>$'.number_format($pickup["price"], 2, ".", "").'</td>';
+				}else{
+					echo '<td></td>';
+				}
+				echo '</tr>';
+			 
 		}
 	}
 
@@ -496,22 +492,9 @@ if(isset($_POST["action"])){
 				if(strlen($short_text_notes) > 50){
 					$short_text_notes = substr($short_text_notes, 0, 50)."...";
 				}
-					foreach($highlight as $item) {
-						if($item == $pickup["upc"]) {
-							$color = 'background: yellow';
-							break;
-						}else {
-							$color = 'background: none';
-							
-						}
-						
-					}
 
 				echo '<tr id="upc_'.$pickup["upc"].'" style="scroll-margin: 170px; '.$color.';">';
 				if($_SESSION['superuser']=='admin'){ 
-				   if($pickup["weight"] === '') {
-				   	   $pickup["weight"] = 0;
-				   }
 					echo '<td class="print_column_td">
 							
 								<input type="number" 
@@ -527,9 +510,7 @@ if(isset($_POST["action"])){
 								data-item_name="'.mysqli_real_escape_string($connection, $pickup["item_name"]).'" 
 								data-description="'.mysqli_real_escape_string($connection, $pickup["description"]).'" 
 								data-cover="'.mysqli_real_escape_string($connection, $pickup["cover"]).'" 
-								data-price="'.$pickup["price"].'"
-								data-weight="'.$pickup["weight"].'"
-								data-displaybox='.$pickup["display_box"].'>
+								data-price="'.$pickup["price"].'">
 								
 							
 						</td>';

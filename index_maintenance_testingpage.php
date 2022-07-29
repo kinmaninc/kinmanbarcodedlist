@@ -50,7 +50,7 @@ if($_SESSION['superuser']=='admin'){
 		</div> 
 		<br> 
 		-->
-				<div class="float-right">
+		  <div class="float-right" style = 'position: relative;'>
         	<button type="button" class="btn btn-light btn-sm" id = 'export2ndbtn' ><i class="fa fa-file-export"></i> Export on Excel Spreadsheet</button>
 			<button type="button" class="btn btn-light btn-sm" onclick="viewpage('guest')"><i class="fa fa-eye"></i> Normal mode</button>
         	<button type="button" class="btn btn-info btn-sm" onclick="viewpage('admin')"><i class="fa fa-cogs"></i> Edit mode</button>
@@ -103,7 +103,7 @@ if($_SESSION['superuser']=='admin'){
         	<br>
         	<button type="button" class="btn btn-success btn-sm" onclick="show_add_modal()"><i class="fa fa-plus"></i> Add item</button>
         	<button type="button" class="btn btn-danger btn-sm" id="delete_btn" disabled onclick="delete_item()"><i class="fa fa-trash"></i> Delete item(s)</button>
-
+		    <?php require 'floating_totalweight_and_displaybox.php'; ?>
         </div> 
 
         	
@@ -112,6 +112,7 @@ if($_SESSION['superuser']=='admin'){
         	<br>
         	<br>
         	<br>
+    
 			<?php require 'product_table.php'; ?>
 			<!-- <table class="table table-bordered">
 				<thead class="thead-dark" style="position: sticky; top: 0;">
@@ -287,7 +288,8 @@ if($_SESSION['superuser']=='admin'){
 <?php require 'duplicate_checker.php'; ?>
 <?php require 'search_modal.php'; ?>
 <?php require 'update_bulk_items_modal_and_script.php'; ?>
-<?php require 'add_bulk_items_modal_and_script.php'; ?>
+<?php require 'add_bulk_items_modal_and_script.php'; ?>.
+
 
 <script type="text/javascript">
 show_table_pickups();
