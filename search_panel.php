@@ -1,4 +1,4 @@
-		<div class="card sticky-top searchDiv float-left sticky-top" id="searchDiv">
+		<div class="card sticky-top searchDiv float-left sticky-top" style = 'width: 45%;' id="searchDiv">
 			<div class="row">
 				<div class="col-lg-6 col-xs-12">
 					<div class="form-group">
