@@ -166,7 +166,7 @@ tr td{
   color: #FF9B00;
 }
 .highlighted {
-  background-color: yellow;
+  background-color: red !important;
 }
 
 .xbtn-sm {
