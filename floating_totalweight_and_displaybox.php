@@ -1,5 +1,5 @@
 		<div class="card sticky-top float-right sticky-top flaotordersum-hide" id="flaotordersum">
-			<div class="row" style = 'width: 100%;'>
+			<div id class="row" style = 'width: 100%;'>
                 <div style="margin-top: -30px;width: 100%; text-align: right; ">
                     <span id = 'miniwindowtogglebtn' style='display: none; cursor: pointer; border-top-left-radius: 5px; border-top-right-radius: 5px; padding-left: 10px; font-size: 10px; padding-bottom: 5px; padding-top: 5px; padding-right: 10px;background-color: rgb(40 40 40);'>
                         <span id = 'toggle-label'>Hide Mini Window</span> 
@@ -21,6 +21,7 @@
                         <li><span class = 's_valuecoontainer' id = 's_total25kgbox'>0</span><span class = 's_label'>Number of 25Kg FedEx Boxes:</span></li>     
                        
                         <li><span class = 's_valuecoontainer' id = 's_moreboxes'>0</span><span class = 's_label'>Displays needed to fill the current FedEx box</span></li>  
+                        <li style = '' id= 'boxlimit' style = ''><span style = 'margin-right: 5px;'>Display boxes cannot exceed over 270</span></li>  
                         <li id= 'showpanel' style = ''><span style = 'margin-right: 5px;'>Show More</span><i class="fa fa-arrow-down"></i></li>  
                     </ul>
                 </div>
@@ -82,41 +83,65 @@
 
 
 <script>
+//==================  ================================================================
+document.querySelector('#hide-fw').onclick = (() => { 
+       document.querySelector('#flaotordersum').style.display = 'none'; 
+       document.querySelector('#hide-fw').style.display = 'none';
+       document.querySelector('#show-fw').style.display = null;
+
+       if(document.querySelector('#hidepanel').style.display == 'inline') {
+         document.querySelector('#hidepanel').click();
+       }
+});
+
+document.querySelector('#show-fw').onclick = (() => { 
+       document.querySelector('#flaotordersum').style.display = null;
+       document.querySelector('#hide-fw').style.display = null;
+       document.querySelector('#show-fw').style.display = 'none';
+});
+//=================================================================================================
+
 
 function get_items(item) {
    var arr_weight = [];
    var arr_displaybox = [];
    var total_weight = 0;
    var total_displaybox = 0;
+   var mdisbox = 0; 
+   var mweight = 0;
    console.log('==================================================');
    document.querySelectorAll('input[data-type="qty_selector"]').forEach((elem) => {
         var id = elem.id;
         var qty = elem.value;
         var weight = elem.dataset.weight;
         var displaybox = elem.dataset.displaybox;
-    
+
         if(qty > 0){
-                      console.log("raw weights :"+ weight);
+                     console.log("raw weights :"+ weight);
                      total_weight =+ weight * qty; // sum of the current item's weight
                      total_displaybox =+ displaybox * qty; // sum of the current item's display boxes
-                     if(weight === '' || typeof(weight) === undefined ){
+ 
+                    if(weight === '' || typeof(weight) === undefined ){
                         weight = 0;
                         arr_weight.push(weight);
-                     }else {
+                    }else {
                         arr_weight.push(total_weight);
                         arr_displaybox.push(total_displaybox); 
-                     }  
+                    }  
                     const reducer = (accumulator, curr) => accumulator + curr; // loops over the array and calls the reducer function to store the value of array computation by the function in an accumulator
                     total_weight = arr_weight.reduce(reducer); // sum off all weight in the array
                     total_displaybox = arr_displaybox.reduce(reducer); // sum off all displayboxes in the array
-        }  
+
+
+        } 
    });
 
         // pass the total values to the element
         boxSize(total_displaybox);
-        document.querySelector('#totalkg').value = total_weight.toFixed(3) + "Kg"; // toFixed() will keep the value in # decimal places
-        document.querySelector('#displayboxcounter').value = total_displaybox;
-        document.querySelector('#s_totaldisplayboxes').innerHTML = total_displaybox;
+        maxlimit(total_displaybox);
+        document.querySelector('#totalkg').value = total_weight.toFixed(3) - mweight + "Kg"; // toFixed() will keep the value in # decimal places
+        document.querySelector('#displayboxcounter').value = total_displaybox - mdisbox;
+        document.querySelector('#s_totaldisplayboxes').innerHTML = total_displaybox - mdisbox;
         displaybox_flash();
 }
 
@@ -126,7 +151,7 @@ var boxes = 0;
 var remainigboxes = 0;
 
 function boxSize(total_displaybox) {
-
+    
     console.log("total boxes :"+ total_displaybox); 
     if(total_displaybox <= 90 && total_displaybox != 0) {
         if(total_displaybox <= 40 ) {
@@ -194,6 +219,25 @@ function boxSize(total_displaybox) {
          
 }
 
+function maxlimit(total_displaybox){
+
+    document.querySelectorAll('input[data-type="qty_selector"]').forEach((elem) => {
+        if(elem.dataset.displaybox == 1){
+            if(total_displaybox > 269){
+                elem.setAttribute('max', elem.value);
+            }else {
+                elem.removeAttribute('max');
+            }
+        }else {
+            if(total_displaybox > 268){
+                elem.setAttribute('max', elem.value);
+            }else {
+                elem.removeAttribute('max');
+            }    
+        }
+    });
+}
+
 function moreboxes(total_displaybox, count, boxtype) {
     boxes = count - total_displaybox;
     console.log("computation :"+ count + "-" + total_displaybox);
@@ -205,17 +249,10 @@ function moreboxes(total_displaybox, count, boxtype) {
 //remove title highlight on mouse over
 document.querySelector('#flaotordersum').onmouseover = ((elem) => {
     var summarytitle = document.querySelector('#box-title'); 
-    // summarytitle.classList.remove('left-flash-green');
-    // summarytitle.classList.remove('left-flash-orange');
-    // summarytitle.classList.remove('left-flash-blue');
-    // summarytitle.classList.remove('left-flash-violet');
-
-    
 });
 
 document.querySelector('#flaotordersum').onmouseout = ((elem) => {
      var val = event.target.value;
-     //displaybox_flash();
 });
 
 document.querySelector('#showpanel').onclick = (() => {
@@ -281,19 +318,37 @@ function displaybox_flash() {
 
     if(displaybox.value >= 40 && displaybox.value < 90) {
          displaybox.classList.add('flash-green');
-         summarytitle.classList.add('left-flash-green');
     }
     if(displaybox.value >= 90 && displaybox.value < 130 ){
         displaybox.classList.add('flash-orange');
-        summarytitle.classList.add('left-flash-orange');
     }
     if(displaybox.value >= 130 && displaybox.value < 180 ){
         displaybox.classList.add('flash-blue');  
-        summarytitle.classList.add('left-flash-blue');
     } 
     if(displaybox.value >= 180 ){
         displaybox.classList.add('flash-violet');
-        summarytitle.classList.add('left-flash-violet');
+    }
+
+
+
+    if(document.querySelector('#hidepanel').style.display == 'none'){
+        if(displaybox.value >= 40 && displaybox.value < 90) {
+            summarytitle.classList.add('left-flash-green');
+        }
+        if(displaybox.value >= 90 && displaybox.value < 130 ){
+            summarytitle.classList.add('left-flash-orange');
+        }
+        if(displaybox.value >= 130 && displaybox.value < 180 ){
+            summarytitle.classList.add('left-flash-blue');
+        } 
+        if(displaybox.value >= 180 ){           
+            summarytitle.classList.add('left-flash-violet');
+        } 
+    }else {
+        summarytitle.classList.remove('left-flash-green');
+        summarytitle.classList.remove('left-flash-orange');
+        summarytitle.classList.remove('left-flash-blue');
+        summarytitle.classList.remove('left-flash-violet');    
     }
 }
 </script>
@@ -420,6 +475,19 @@ function displaybox_flash() {
 }
 
 /* ================================================================== */
+#boxlimit {
+    margin-right: 5px; */
+    width: 100%;
+    text-align: center;
+    /* border: 1px solid rgb(255 255 0); */
+    padding: 5px;
+    margin-top: 10px;
+    color: rgb(0 0 0);
+    background: rgb(255 255 0);
+    font-weight: 700;
+    border-radius: 3px;
+}
+
 #showpanel {
     cursor: pointer; 
     text-align: center; 
