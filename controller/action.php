@@ -617,9 +617,9 @@ if(isset($_POST["action"])){
                                         '{$street1}',
                                         '{$street2}',
                                         '{$street3}',
-                                        '{$complete_address}',                                        
+                                        '{$complete_address}',
+										'{$city}',                                        
                                         '{$regionstate}',
-                                        '{$city}',
                                         '{$orderid}',
                                         '{$country}',
                                         '{$zipcode}',
@@ -703,6 +703,7 @@ if(isset($_POST["action"])){
 	}
 
 	if($_POST["action"]=="show_real_total_amount"){
+		//unset($_SESSION["real_total"]);
 		$totalamount = $_POST["total_amount"];
 		$dealerid = $_SESSION['logged_id'];
         $tbl_dealers = mysqli_query($connection, "SELECT * FROM tbl_dealers WHERE dealer_id='$dealerid'");
@@ -732,7 +733,7 @@ if(isset($_POST["action"])){
         	$real_amount = $totalamount*($mydiscount/100);
         	$real_amount = floatval($totalamount-$real_amount);
         }
-
+	//	$_SESSION['real_total'] = $real_amount;
         echo '$'.number_format($real_amount, 2, ".", ",").'|'.$mydiscount.'%';
 
 	}
