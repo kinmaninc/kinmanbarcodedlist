@@ -3,6 +3,7 @@ require '../configuration.php';
 // echo json_encode($_POST[" "]); 
 // echo json_encode($_POST['cover']); 
 $dealer_id = mysqli_real_escape_string($connection, $_POST['user_id']);
+$purchaseordernumber = mysqli_real_escape_string($connection, $_POST['purchaseordernumber']);
 $without_discount_price =  floatval($_POST['orig_total_amount']);
 
 				//getting dealer discount
@@ -58,6 +59,7 @@ $without_discount_price =  floatval($_POST['orig_total_amount']);
     $sql_t_order ="INSERT INTO t_order   
                           (f_order_id,
                           f_customer_id,
+						  f_purchase_ordernumber,
                           f_order_date,           
                           f_type_currency,
                           status,
@@ -72,6 +74,7 @@ $without_discount_price =  floatval($_POST['orig_total_amount']);
                           VALUES
                           ('$orderidlast',                     
                            '$userid',
+						   '$purchaseordernumber',
                            '$today',
                            '$currency_type',
                            'Can be changed',

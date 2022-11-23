@@ -123,6 +123,7 @@ $dealer = mysqli_fetch_assoc($dealers);
         </button>
       </div>
       <div class="modal-body" id="addtocart_details">
+	  	
         
       </div>
       <div id="addtocart_results"></div>
@@ -777,6 +778,7 @@ function print_order(){
 	var ids = [];
 	text += `<form id="form1" method="POST">`;
 	text += `<input type="hidden" name="user_id" value="`+$('#user_id').val()+`">`;
+	text += `<span>Enter Purchase Order Number: </span><input style= 'margin: 5px;' type="text" id= 'purchaseordernumber' name="purchaseordernumber" maxlength = '15'> <span style = 'color: red; display: none;' id = 'emptypurchasenumber'> Please enter purchase order number </span>`;
 	text += `<table border="1" style="width:100%;">`;
 	text += `<thead>
 						<tr>
@@ -895,9 +897,22 @@ function add_notes(id){
 	}
 	$('#addnotes_modal').modal('hide');
 }
-
+// document.querySelector('#purchaseordernumber').onkeyup = (() => {
+// 	console.log(document.querySelector('#purchaseordernumber').value.length);
+// 	if(document.querySelector('#purchaseordernumber').value.length >= 15){
+	
+// 	}
+// })
 function checkoutform(){
-	$('#checkoutform_modal').modal('show');
+//$('#checkoutform_modal').modal('show');
+	if(document.querySelector('#purchaseordernumber').value != ''){
+		$('#checkoutform_modal').modal('show');
+
+	}else {
+		console.log('enter purchase order number');
+		document.querySelector('#purchaseordernumber').style.border = "2px solid red";
+		//document.querySelector('#purchaseordernumber').style.border
+	}
 }
 
 function showpurchaseterms(){
@@ -1075,7 +1090,7 @@ function submit_order(type = 1){
 
 				// $('#addtocart_results').html(result);
 				$.ajax({
-					url: "controller/action.php",
+					url: "controller/action-test.php",
 					type: "POST",
 					data: {action: "insert_shipping_address", 
 								order_no: result, userid: $('#user_id').val(), 
@@ -1088,7 +1103,8 @@ function submit_order(type = 1){
 								zipcode: $('input[name="zipcode"]').val(), 
 								country: $('input[name="country"]').val(), 
 								mobileno: $('input[name="mobileno"]').val(), 
-								telno: $('input[name="telno"]').val()
+								telno: $('input[name="telno"]').val(),
+								
 					},
 					success: function(data){
 								setTimeout(function(){
