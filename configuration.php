@@ -1,13 +1,13 @@
 <?php 
-// $username = "soniminc_webuser";
-// $password = "7VngX%n*UnMV";
-// $database   = "soniminc_newkinman";
-// $server   = "localhost";
-
-$username = "root";
-$password = "";
-$database   = "pickups_inventory";
+$username = "soniminc_webuser";
+$password = "ZTql,pKR}UA1";
+$database   = "soniminc_newkinman";
 $server   = "localhost";
+
+// $username = "root";
+// $password = "";
+// $database   = "pickups_inventory";
+// $server   = "localhost";
 //hupd
 $connection = mysqli_connect($server, $username, $password, $database);
 if(!$connection){
