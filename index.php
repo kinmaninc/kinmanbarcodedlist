@@ -30,7 +30,10 @@ $dealer = mysqli_fetch_assoc($dealers);
         
         <input type="hidden" id="user_id" value="<?php echo $_SESSION['logged_id']; ?>">
         <span><?php echo $dealer["dealer_name"]; ?> <i id="info_btn" class="fa fa-info-circle laytblu cursor" onclick="show_discount_div(1)"></i></span>
-        
+        <a style = 'border: none; 
+					float: right;
+					margin-top: -5px;
+					font-size: 15px;' href="logout.php" class="btn btn-danger btn-sm">Logout<i style ='margin-left: 5px;' class="fa fa-sign-out"></i></a>
         <div class="discounttooltipsy">
         	<?php
         		$dealerid = $_SESSION['logged_id'];
@@ -72,10 +75,11 @@ $dealer = mysqli_fetch_assoc($dealers);
 		<h1>Pickups Inventory</h1>
 		<input type="hidden" value="<?php echo $_SESSION['logged_id']; ?>">
 		<span><?php echo $dealer["dealer_name"]; ?></span> 
-		</div>
-		<!--
 		<a href="logout.php" class="btn btn-danger btn-sm">Log-out</a>
         <br>
+		</div>
+		<!--
+		
 		 <div align="right">
 			<a href="add.php" class="btn btn-outline-success">Add item</a>
 		</div> 

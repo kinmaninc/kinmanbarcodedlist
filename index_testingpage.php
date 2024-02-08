@@ -30,7 +30,10 @@ $dealer = mysqli_fetch_assoc($dealers);
         
         <input type="hidden" id="user_id" value="<?php echo $_SESSION['logged_id']; ?>">
         <span><?php echo $dealer["dealer_name"]; ?> <i id="info_btn" class="fa fa-info-circle laytblu cursor" onclick="show_discount_div(1)"></i></span>
-        
+        <a style = 'border: none; 
+					float: right;
+					margin-top: -5px;
+					font-size: 15px;' href="logout.php" class="btn btn-danger btn-sm">Logout<i style ='margin-left: 5px;' class="fa fa-sign-out"></i></a>
         <div class="discounttooltipsy">
         	<?php
         		$dealerid = $_SESSION['logged_id'];
@@ -72,49 +75,18 @@ $dealer = mysqli_fetch_assoc($dealers);
 		<h1>Pickups Inventory</h1>
 		<input type="hidden" value="<?php echo $_SESSION['logged_id']; ?>">
 		<span><?php echo $dealer["dealer_name"]; ?></span> 
-		</div>
-		<!--
 		<a href="logout.php" class="btn btn-danger btn-sm">Log-out</a>
         <br>
+		</div>
+		<!--
+		
 		 <div align="right">
 			<a href="add.php" class="btn btn-outline-success">Add item</a>
 		</div> 
 		<br>
 	-->
-
-
-			<div class="float-right" id="super_editor" style="margin-bottom: 10px; position: relative;">
-
-	<?php if($_SESSION['superuser']=='admin'){ ?>		
-		  	<form method="get" action="dist/phpspreadsheet/export_database.php" style = 'display: inline-block'>
-		    	<button type="submit" class="btn btn-light btn-sm" id = 'export2ndbtn' ><i class="fa fa-file-export"></i> Export on Excel Spreadsheet</button>
-        	</form>	
-			<a type="button" class="btn btn-warning btn-sm" href="order_list.php"><i class="fa fa-list"></i> Order History</a>
-        	<button type="button" class="btn btn-info btn-sm" onclick="viewpage('guest')"><i class="fa fa-eye"></i> Normal mode</button>
-        	<button type="button" class="btn btn-light btn-sm" onclick="viewpage('admin')"><i class="fa fa-cogs"></i> Edit mode</button>
-        
-        	<br>
-        	<br>
-        	<button type="button" id="show_order_btn" class="btn btn-danger btn-sm" onclick="print_order();" disabled><i class="fa fa-shopping-cart"></i> Show Order</button>
-        	<button type="button" class="btn btn-outline-primary btn-sm" onclick="show_table_pickups(null, 'default');"><i class="fa fa-retweet"></i> Clear Selections</button>
-        	
-    <?php }else{ //if guest mode
-    			
-    			if($site_setting["allow_customers_to_order"]=="yes"){
-    			?>
-				<form method="get" action="dist/phpspreadsheet/export_database.php" style = 'display: inline-block'>
-		    	  <button type="submit" class="btn btn-light btn-sm" id = 'export2ndbtn' ><i class="fa fa-file-export"></i> Export on Excel Spreadsheet</button>
-        	    </form>		
-	    		<button type="button" id="show_order_btn" class="btn btn-danger btn-sm" onclick="print_order();" disabled><i class="fa fa-shopping-cart"></i> Show Order</button>
-	        	<button type="button" class="btn btn-outline-primary btn-sm" onclick="show_table_pickups(null, 'default');"><i class="fa fa-retweet"></i> Refresh table</button>
-	        
-           
-	    <?php
-	     }
-	  } ?>
-         <?php require 'floating_totalweight_and_displaybox.php'; ?>
-        </div>
-        	<?php require 'product_table.php'; ?>
+        	<?php require 'super-editor.php'; ?>
+			<?php require 'product_table.php'; ?>
 
 
 </body>
@@ -155,6 +127,7 @@ $dealer = mysqli_fetch_assoc($dealers);
         </button>
       </div>
       <div class="modal-body" id="addtocart_details">
+	  	
         
       </div>
       <div id="addtocart_results"></div>
@@ -765,7 +738,11 @@ function show_table_pickups(upc, loader){
 
 			
 			$("input[data-type='qty_selector']").bind('keyup mouseup', function (event) {
+				
+
                 get_items(event.target.id);
+
+				
 			    if(event.target.value != 0){
 			    	$('#'+event.target.id).css("border", "2px solid #FF7401");
 			    	
@@ -774,14 +751,17 @@ function show_table_pickups(upc, loader){
 			    }
 			    var ctr = 0;
 					let qty_selector = $("input[data-type='qty_selector']");
-					for(let element of qty_selector ){ 
-					    if(element.value>0){
-					      ctr++;
-								
-					    }else{
-								
-					    }
-					}
+
+						for(let element of qty_selector ){ 
+							
+								if(element.value>0){
+								ctr++;
+										
+								}else{
+										
+								}
+						
+						}
 					if(ctr>0){
 						$('#show_order_btn').attr("disabled", false);
 					}else{
@@ -802,6 +782,7 @@ function print_order(){
 	var ids = [];
 	text += `<form id="form1" method="POST">`;
 	text += `<input type="hidden" name="user_id" value="`+$('#user_id').val()+`">`;
+	text += `<span>Enter Purchase Order Number: </span><input style= 'margin: 5px;' type="text" id= 'purchaseordernumber' name="purchaseordernumber" maxlength = '15'> <span style = 'color: red; display: none;' id = 'emptypurchasenumber'> Please enter purchase order number </span>`;
 	text += `<table border="1" style="width:100%;">`;
 	text += `<thead>
 						<tr>
@@ -920,9 +901,22 @@ function add_notes(id){
 	}
 	$('#addnotes_modal').modal('hide');
 }
-
+// document.querySelector('#purchaseordernumber').onkeyup = (() => {
+// 	console.log(document.querySelector('#purchaseordernumber').value.length);
+// 	if(document.querySelector('#purchaseordernumber').value.length >= 15){
+	
+// 	}
+// })
 function checkoutform(){
-	$('#checkoutform_modal').modal('show');
+//$('#checkoutform_modal').modal('show');
+	if(document.querySelector('#purchaseordernumber').value != ''){
+		$('#checkoutform_modal').modal('show');
+
+	}else {
+		console.log('enter purchase order number');
+		document.querySelector('#purchaseordernumber').style.border = "2px solid red";
+		//document.querySelector('#purchaseordernumber').style.border
+	}
 }
 
 function showpurchaseterms(){
@@ -1100,7 +1094,7 @@ function submit_order(type = 1){
 
 				// $('#addtocart_results').html(result);
 				$.ajax({
-					url: "controller/action.php",
+					url: "controller/action-test.php",
 					type: "POST",
 					data: {action: "insert_shipping_address", 
 								order_no: result, userid: $('#user_id').val(), 
@@ -1113,7 +1107,8 @@ function submit_order(type = 1){
 								zipcode: $('input[name="zipcode"]').val(), 
 								country: $('input[name="country"]').val(), 
 								mobileno: $('input[name="mobileno"]').val(), 
-								telno: $('input[name="telno"]').val()
+								telno: $('input[name="telno"]').val(),
+								
 					},
 					success: function(data){
 								setTimeout(function(){
