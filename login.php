@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD']== "POST" && isset($_POST["login_submit"])){
     $dealer = mysqli_fetch_assoc($dealers);
     if(!empty($dealer["id"])){
         $_SESSION['logged_id'] = $user["id"];
-        if($user["id"]=='n4087' || $user["id"]=='31'){
+        if($user["id"]=='n4087' || $user["id"]=='31' || $user["id"]=='224'){
             $_SESSION['superuser'] = "admin";
         }else{
             $_SESSION['superuser'] = "guest";
