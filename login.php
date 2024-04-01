@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD']== "POST" && isset($_POST["login_submit"])){
 <html>
 <head>
 	<?php require 'meta.php'; ?>
-	<title>Log-in | Kinman Pickups</title>
+	<title>Barcode Page | Kinman Pickups</title>
 	<?php require 'link.php'; ?>
 	<?php require 'script.php'; ?>
 </head>
