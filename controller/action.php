@@ -550,7 +550,9 @@ if(isset($_POST["action"])){
 								data-item_name="'.mysqli_real_escape_string($connection, $pickup["item_name"]).'" 
 								data-description="'.mysqli_real_escape_string($connection, $pickup["description"]).'" 
 								data-cover="'.mysqli_real_escape_string($connection, $pickup["cover"]).'" 
-								data-price="'.$pickup["price"].'">
+								data-price="'.$pickup["price"].'"
+								data-weight="'.$pickup["weight"].'"
+								data-displaybox='.$pickup["display_box"].'>
 	
 						</td>';
 					}
