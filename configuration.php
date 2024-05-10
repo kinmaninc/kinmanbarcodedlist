@@ -1,6 +1,6 @@
 <?php 
 $username = "soniminc_webuser";
-$password = "ZTql,pKR}UA1";
+$password = "Jv#Kxwb%}W*V";
 $database   = "soniminc_newkinman";
 $server   = "localhost";
 
