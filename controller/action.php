@@ -1,12 +1,9 @@
 <?php
 require '../configuration.php';
-
-
  $highlight = array(
 "639114917715",
 "639114917777",
 "639114917838",
-"639114917890",
 "639114917951",
 "639114918019",
 "639114918071",
@@ -17,17 +14,26 @@ require '../configuration.php';
 "639114918293",
 "639114918323",
 "639114918354",
+"639114918385",
+"639114918415",
+"639114918446",
+"639114918477",
+"639114918507",
+"639114918538",
 "639114918569",
 "639114918583",
 "639114918606",
 "639114918620",
+"639114918644",
+"639114918668",
+"639114918682",
+"639114918705",
 "639114918729",
 "639114918781",
 "639114918842",
 "639114918903",
 "639114918965",
 "639114919085",
-"639114919207",
 "639114919313",
 "639114919375",
 "639114919399",
@@ -35,10 +41,8 @@ require '../configuration.php';
 "639114919474",
 "639114919498",
 "639114919641",
-"639114919672",
 "639114919535",
 "639114919566",
-"639114919573",
 "639114919603",
 "639114919702");
 
@@ -50,7 +54,7 @@ require '../configuration.php';
 if(isset($_POST["action"])){
 
 	$color = 'background: none';
-	$codes = mysqli_query($connection, "SELECT * FROM inv_pickups");
+	$codes = mysqli_query($connection, "SELECT * FROM inv_pickups ORDER BY category");
 		while($code = mysqli_fetch_assoc($codes)){
 			foreach($highlight as $item) {
 				if($item == $code["upc"]) {
@@ -67,7 +71,7 @@ if(isset($_POST["action"])){
 		echo '~u make the flowers bloom';
 	}
 	if($_POST["action"]=="show_table_pickups"){
-		$pickups = mysqli_query($connection, "SELECT * FROM inv_pickups");
+		$pickups = mysqli_query($connection, "SELECT * FROM inv_pickups ORDER BY category ");
 		while($pickup = mysqli_fetch_assoc($pickups)){
 
 			$short_text_description = preg_replace( "/\n\s+/", "\n", trim(strip_tags(htmlspecialchars_decode($pickup["description"]))));
@@ -467,7 +471,7 @@ if(isset($_POST["action"])){
 
 	if($_POST["action"]=="show_table_pickups_index"){
 		if($_POST["loader"]=='default'){
-			$pickups = mysqli_query($connection, "SELECT * FROM inv_pickups ORDER BY id ASC");
+			$pickups = mysqli_query($connection, "SELECT * FROM inv_pickups ORDER BY category");
 		// $pickups = mysqli_query($connection, "SELECT * FROM inv_pickups WHERE id IN ('205','206','207')");
 
 		}

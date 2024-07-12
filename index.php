@@ -1094,7 +1094,7 @@ function submit_order(type = 1){
 
 				// $('#addtocart_results').html(result);
 				$.ajax({
-					url: "controller/action-test.php",
+					url: "controller/action.php",
 					type: "POST",
 					data: {action: "insert_shipping_address", 
 								order_no: result, userid: $('#user_id').val(), 
