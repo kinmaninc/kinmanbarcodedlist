@@ -15,6 +15,7 @@ $dealer = mysqli_fetch_assoc($dealers);
 	<?php require 'script.php'; ?>
 	<!-- Scroll to top only -->
 	<link rel="stylesheet" type="text/css" href="dist/css/scrolltotop.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
@@ -813,7 +814,7 @@ function print_order(){
 		  	text += `<td>`+items[i].value+`</td>`;
 		  	text += `<td>`+price+`</td>`;
 		  	text += `<td>`+parseFloat(price*items[i].value)+`</td>`;
-		  	text += `<td align="center"><button type="button" class="btn btn-sm btn-secondary" id="addnotesbtn`+i+`" onclick="addnotes(`+i+`,`+parseFloat(i+1)+`)"><i class="fa fa-sticky-note" aria-hidden="true"></i></button></td>`;
+		  	text += `<td align="center"><button type="button" class="btn btn-sm btn-secondary" id="addnotesbtn`+i+`" onclick="addnotes(`+i+`,`+parseFloat(i+1)+`)"><i style = 'font-size: 20px;' class="fa fa-sticky-note-o"></i></button></td>`;
 		  	text += `</tr>`;
 
 		  	text += `<tr style="display: none;"><td colspan="7">
