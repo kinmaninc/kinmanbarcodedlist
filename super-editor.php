@@ -1,4 +1,4 @@
-<div class="float-right" id="super_editor" style="margin-bottom: 10px; position: relative;">
+<div class="float-right" id="super_editor" style="margin-top: 10px; position: relative;">
 
 	<?php if($_SESSION['superuser']=='admin'){ ?>		
 		  	<form method="get" action="dist/phpspreadsheet/export_database.php" style = 'display: inline-block'>
